@@ -1,8 +1,9 @@
 import './App.scss';
 import { useEffect, useState } from 'react';
+import Metric from './components/Metric.tsx';
 
 const App = () => {
-  const [data, setData] = useState({weather: []});
+  const [data, setData] = useState({ weather: [] });
 
   useEffect(() => {
     fetch(
@@ -33,39 +34,9 @@ const App = () => {
             color: 'white',
             background: 'red',
             marginBottom: '.8rem',
-            padding: '16rem',
           }}
         >
-          <div
-            className="radio-btns"
-            style={{ background: 'yellowgreen', display: 'inline' }}
-          >
-            <div>Metrics:</div>
-            <div>
-              <input type="radio" id="option1" value="option1" />
-              <label htmlFor="option1">C</label>
-            </div>
-            <div>
-              <input type="radio" id="option1" value="option1" />
-              <label htmlFor="option1">F</label>
-            </div>
-          </div>
-
-          <div>Today: </div>
-
-          <div>
-            Icon:
-            <img
-              alt="weather icon"
-              className="weather-icon"
-              src={`icons/${data.weather[0]?.icon}.png`}
-            />
-          </div>
-          <div>Location:</div>
-          <div>Weather Condition:</div>
-          <div>Feels like:</div>
-          <div>Humidity:</div>
-          <div>Wind speed:</div>
+          <Metric />
         </div>
         <div
           style={{
