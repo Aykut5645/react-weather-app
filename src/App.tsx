@@ -1,12 +1,19 @@
 import './App.scss';
-import useLocation from './hooks/useLocation.tsx';
+import { useEffect, useState } from 'react';
 
 const App = () => {
-  // const [data, setData] = useState({});
-  const location = useLocation();
-  if (location) {
-    console.log('Lat and Lng => ', location);
-  }
+  const [data, setData] = useState({weather: []});
+
+  useEffect(() => {
+    fetch(
+      'https://api.openweathermap.org/data/2.5/weather?lat=42.6926003&lon=23.3557927&appid=8c8665dfe9c59d77eb1e4d54ad9490a1'
+    )
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
+
+  console.log('Data => ', data);
+
   return (
     <div className="container">
       <h1
@@ -46,7 +53,14 @@ const App = () => {
 
           <div>Today: </div>
 
-          <div>Icon:</div>
+          <div>
+            Icon:
+            <img
+              alt="weather icon"
+              className="weather-icon"
+              src={`icons/${data.weather[0]?.icon}.png`}
+            />
+          </div>
           <div>Location:</div>
           <div>Weather Condition:</div>
           <div>Feels like:</div>
