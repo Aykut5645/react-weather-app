@@ -1,3 +1,21 @@
-@import "styles/abstracts/mixins";
+// abstracts
+@import 'styles/abstracts/mixins';
+@import 'styles/abstracts/variables';
 
-@import "styles/base/base";
+// base
+@import 'styles/base/base';
+
+// layout
+@import 'styles/layout/main';
+
+//.container-primary {
+//  min-height: 100vh;
+//  background-image: linear-gradient(
+//                  to right bottom,
+//                  rgb(51, 51, 51),
+//                  rgba(38, 38, 38, 0.8)
+//  ),
+//  url('assets/nat-4.jpg');
+//  background-size: cover;
+//  background-position: top;
+//}

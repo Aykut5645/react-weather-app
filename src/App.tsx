@@ -16,7 +16,7 @@ const App = () => {
   console.log('Data => ', data);
 
   return (
-    <div className="container">
+    <div className="container-primary">
       <h1
         style={{
           color: 'white',
@@ -32,11 +32,19 @@ const App = () => {
         <div
           style={{
             color: 'white',
-            background: 'red',
+            padding: '1rem',
+            background: 'transparent',
             marginBottom: '.8rem',
+            border: '2px solid #55c57a',
+            borderRadius: 5,
           }}
         >
           <Metric />
+          <img
+            alt="weather icon"
+            className="weather-icon"
+            src={`src/assets/icons/${data.weather[0]?.icon}.png`}
+          />
         </div>
         <div
           style={{
