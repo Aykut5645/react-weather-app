@@ -1,6 +1,6 @@
-import './Metric.scss';
+import './MetricSwitcher.scss';
 
-const Metric = () => {
+const MetricSwitcher = () => {
   return (
     <div className="metrics">
       <div className="metrics__radio-group">
@@ -32,4 +32,4 @@ const Metric = () => {
   );
 };
 
-export default Metric;
+export default MetricSwitcher;
