@@ -1,5 +1,7 @@
+import WeatherDetails from "../components/WeatherDetails.tsx";
+
 const DetailsPage = () => {
-  return <h1>Details Page</h1>;
+  return <WeatherDetails />;
 };
 
 export default DetailsPage;

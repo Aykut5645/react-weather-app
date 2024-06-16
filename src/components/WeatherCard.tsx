@@ -1,16 +1,11 @@
 import { Link } from 'react-router-dom';
+import { getWeekDay } from '../utils/helpers.tsx';
 
 type WeatherCardProps = {
   dt: number;
   icon: string;
   temp: number;
   date: string;
-};
-
-const getWeekDay = (dt: number) => {
-  return new Date(dt * 1000).toLocaleString('en-us', {
-    weekday: 'long',
-  });
 };
 
 const WeatherCard = ({ dt, icon, temp }: WeatherCardProps) => {

@@ -1,11 +1,21 @@
+export const getWeekDay = (dt: number) => {
+  return new Date(dt * 1000).toLocaleString('en-us', {
+    weekday: 'long',
+  });
+};
+
 export const getDailyMiddayWeather = (data) => {
   const today = new Date();
-  const fiveDaysFromToday = new Date();
-  fiveDaysFromToday.setDate(today.getDate() + 4);
+  const startOfTomorrow = new Date(today);
+  startOfTomorrow.setDate(today.getDate() + 1);
+  startOfTomorrow.setHours(0, 0, 0, 0);
+
+  const fourDaysFromTomorrow = new Date(startOfTomorrow);
+  fourDaysFromTomorrow.setDate(startOfTomorrow.getDate() + 4);
 
   const filteredList = data.list.filter((item) => {
     const itemDate = new Date(item.dt_txt);
-    return itemDate >= today && itemDate < fiveDaysFromToday;
+    return itemDate >= startOfTomorrow && itemDate < fourDaysFromTomorrow;
   });
 
   const groupedByDay = filteredList.reduce((acc, curr) => {
@@ -16,7 +26,7 @@ export const getDailyMiddayWeather = (data) => {
     return acc;
   }, {});
 
-  const dailyData = Object.keys(groupedByDay).map((date) => {
+  return Object.keys(groupedByDay).map((date) => {
     const dayEntries = groupedByDay[date];
     const middayEntry =
       dayEntries.find((entry) => entry.dt_txt.includes('12:00:00')) ||
@@ -30,6 +40,4 @@ export const getDailyMiddayWeather = (data) => {
       icon: middayEntry.weather[0].icon,
     };
   });
-
-  return dailyData;
 };

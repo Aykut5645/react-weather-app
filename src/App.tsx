@@ -15,7 +15,7 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: '/:date',
+        path: '/:weekDay',
         element: <DetailsPage />,
       },
     ],
