@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import WeatherCard from '../WeatherCard.tsx';
+import WeatherCard from '../WeatherCard/WeatherCard.tsx';
 import { getDailyMiddayWeather } from '../../utils/helpers.tsx';
 
 import styles from './WeatherList.module.scss';

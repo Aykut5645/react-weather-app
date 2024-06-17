@@ -1,4 +1,4 @@
-import MetricSwitcher from '../components/MetricSwitcher.tsx';
+import MetricSwitcher from '../components/MetricSwitcher/MetricSwitcher.tsx';
 import CurrentWeather from '../components/CurrentWeather/CurrentWeather.tsx';
 import WeatherList from '../components/WeatherList/WeatherList.tsx';
 
