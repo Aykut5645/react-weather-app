@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router';
 
-import Header from './Header.tsx';
-import Main from './Main.tsx';
+import Header from './Header/Header.tsx';
+import Main from './Main/Main.tsx';
 
 const Layout = () => {
   return (

@@ -1,30 +1,30 @@
-import './MetricSwitcher.scss';
+import styles from './MetricSwitcher.module.scss';
 
 const MetricSwitcher = () => {
   return (
-    <div className="metric">
-      <div className="metric__radio-group">
+    <div className={styles['metric']}>
+      <div className={styles['metric__radio-group']}>
         <input
-          className="metric__radio-input"
+          className={styles['metric__radio-input']}
           type="radio"
           id="celsius"
           name="size"
         />
-        <label htmlFor="celsius" className="metric__radio-label">
-          <span className="metric__radio-button"></span>
+        <label htmlFor="celsius" className={styles['metric__radio-label']}>
+          <span className={styles['metric__radio-button']}></span>
           &deg;C
         </label>
       </div>
 
-      <div className="metric__radio-group">
+      <div className={styles['metric__radio-group']}>
         <input
-          className="metric__radio-input"
+          className={styles['metric__radio-input']}
           type="radio"
           id="fahrenheit"
           name="size"
         />
-        <label htmlFor="fahrenheit" className="metric__radio-label">
-          <span className="metric__radio-button"></span>
+        <label htmlFor="fahrenheit" className={styles['metric__radio-label']}>
+          <span className={styles['metric__radio-button']}></span>
           &deg;F
         </label>
       </div>

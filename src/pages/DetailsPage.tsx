@@ -1,4 +1,4 @@
-import WeatherDetails from "../components/WeatherDetails.tsx";
+import WeatherDetails from "../components/WeatherDetails/WeatherDetails.tsx";
 
 const DetailsPage = () => {
   return <WeatherDetails />;

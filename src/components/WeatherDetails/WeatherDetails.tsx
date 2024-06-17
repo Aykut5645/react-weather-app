@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
-import { getWeekDay } from '../utils/helpers.tsx';
+import { getWeekDay } from '../../utils/helpers.tsx';
 
 const WeatherDetails = () => {
   const [data, setData] = useState([]);
@@ -23,7 +23,7 @@ const WeatherDetails = () => {
         setData({ city: data?.city, ...currentDay });
       });
   }, []);
-  console.log('Result => ', data);
+
   return (
     <div>
       <div style={{ display: 'flex', gap: '2rem', width: '100%' }}>
