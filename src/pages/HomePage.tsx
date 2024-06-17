@@ -1,7 +1,15 @@
-import WeatherList from '../components/WeatherList.tsx';
+import MetricSwitcher from '../components/MetricSwitcher.tsx';
+import CurrentWeather from '../components/CurrentWeather/CurrentWeather.tsx';
+import WeatherList from '../components/WeatherList/WeatherList.tsx';
 
 const HomePage = () => {
-  return <WeatherList />;
+  return (
+    <>
+      <MetricSwitcher />
+      <CurrentWeather />
+      <WeatherList />
+    </>
+  );
 };
 
 export default HomePage;
