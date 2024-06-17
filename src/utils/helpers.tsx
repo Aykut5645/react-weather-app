@@ -1,10 +1,15 @@
+import {
+  ForecastListType,
+  ForecastResponseType,
+} from '../types/ForecastResponseType.tsx';
+
 export const getWeekDay = (dt: number) => {
   return new Date(dt * 1000).toLocaleString('en-us', {
     weekday: 'long',
   });
 };
 
-export const getDailyMiddayWeather = (data) => {
+export const getDailyMiddayWeather = (data: ForecastResponseType) => {
   const today = new Date();
   const startOfTomorrow = new Date(today);
   startOfTomorrow.setDate(today.getDate() + 1);
@@ -18,13 +23,16 @@ export const getDailyMiddayWeather = (data) => {
     return itemDate >= startOfTomorrow && itemDate < fourDaysFromTomorrow;
   });
 
-  const groupedByDay = filteredList.reduce((acc, curr) => {
-    const date = new Date(curr.dt_txt).toLocaleDateString();
-    if (!acc[date]) acc[date] = [];
-    acc[date].push(curr);
+  const groupedByDay = filteredList.reduce(
+    (acc: { [key: string]: ForecastListType[] }, curr) => {
+      const date = new Date(curr.dt_txt).toLocaleDateString();
+      if (!(date in acc)) acc[date] = [];
+      acc[date].push(curr);
 
-    return acc;
-  }, {});
+      return acc;
+    },
+    {}
+  );
 
   return Object.keys(groupedByDay).map((date) => {
     const dayEntries = groupedByDay[date];

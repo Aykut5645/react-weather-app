@@ -1,5 +1,5 @@
-import styles from './CurrentWeather.module.scss';
 import { useCurrentWeather } from '../../hooks/useCurrentWeather.tsx';
+import styles from './CurrentWeather.module.scss';
 
 const CurrentWeather = () => {
   const { weather, isLoading, error } = useCurrentWeather();
@@ -11,7 +11,7 @@ const CurrentWeather = () => {
     <div className={styles['weather__container']}>
       <div className={styles['weather__container__left']}>
         <div className={styles['weather__container__left__temp']}>
-          {Math.round(weather?.main?.temp)}&deg;
+          {Math.round(weather!.main?.temp)}&deg;
         </div>
 
         <div className={styles['weather__container__left__icon']}>
