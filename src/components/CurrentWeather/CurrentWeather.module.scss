@@ -1,0 +1,73 @@
+@import 'src/styles/abstracts/mixins';
+
+.weather__title {
+  color: white;
+  font-size: 2rem;
+
+  @include respond(phone) {
+    text-align: center;
+  }
+}
+
+.weather__container {
+  display: flex;
+  gap: 8rem;
+  padding: 1rem;
+  color: white;
+  font-size: 1.6rem;
+
+  @include respond(phone) {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  &__left {
+    height: 0;
+
+    @include respond(phone) {
+      align-self: center;
+      height: 20rem;
+    }
+
+    &__temp {
+      font-size: 5rem;
+      color: white;
+    }
+
+    &__icon {
+      position: relative;
+      bottom: 4rem;
+      left: 3rem;
+
+      @include respond(phone) {
+        bottom: 5rem;
+      }
+    }
+  }
+
+  &__right {
+    flex: 1;
+    min-height: 19rem;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-around;
+
+    & span {
+      padding-left: 1rem;
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid white;
+      margin-bottom: 1.4rem;
+    }
+
+    &__info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}
