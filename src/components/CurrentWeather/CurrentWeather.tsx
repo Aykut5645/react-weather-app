@@ -1,19 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-
 import styles from './CurrentWeather.module.scss';
+import { useCurrentWeather } from '../../hooks/useCurrentWeather.tsx';
 
 const CurrentWeather = () => {
-  const { data, isLoading } = useQuery({
-    queryKey: ['current-weather'],
-    queryFn: async () => {
-      const res = await fetch(
-        'https://api.openweathermap.org/data/2.5/weather?lat=42.6926003&lon=23.3557927&appid=8c8665dfe9c59d77eb1e4d54ad9490a1&units=metric'
-      );
-      return await res.json();
-    },
-  });
+  const { weather, isLoading, error } = useCurrentWeather();
 
   if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Something went wrong!</div>;
 
   return (
     <>
@@ -21,13 +13,13 @@ const CurrentWeather = () => {
       <div className={styles['weather__container']}>
         <div className={styles['weather__container__left']}>
           <div className={styles['weather__container__left__temp']}>
-            {Math.round(data?.main?.temp)}&deg;
+            {Math.round(weather?.main?.temp)}&deg;
           </div>
 
           <div className={styles['weather__container__left__icon']}>
             <img
               alt="weather icon"
-              src={`src/assets/icons/${(data?.weather && data?.weather[0])?.icon}.png`}
+              src={`src/assets/icons/${(weather?.weather && weather?.weather[0])?.icon}.png`}
             />
           </div>
         </div>
@@ -36,12 +28,12 @@ const CurrentWeather = () => {
           <div className={styles['weather__container__right__header']}>
             <div>
               <b>Feels like</b>
-              <span>{data?.main?.feels_like}&deg;</span>
+              <span>{weather?.main?.feels_like}&deg;</span>
             </div>
             <div>
               <b>Location</b>
               <span>
-                {data?.name} / {data?.sys?.country}
+                {weather?.name} / {weather?.sys?.country}
               </span>
             </div>
           </div>
@@ -49,8 +41,8 @@ const CurrentWeather = () => {
           <div>
             <b>Weather condition</b>
             <span>
-              {(data?.weather && data?.weather[0])?.main} (
-              {(data?.weather && data?.weather[0])?.description})
+              {(weather?.weather && weather?.weather[0])?.main} (
+              {(weather?.weather && weather?.weather[0])?.description})
             </span>
           </div>
 
@@ -60,7 +52,7 @@ const CurrentWeather = () => {
               alt="Cloud"
               style={{ filter: 'invert(100%)' }}
             />
-            <span>Humidity {data?.main?.humidity}%</span>
+            <span>Humidity {weather?.main?.humidity}%</span>
           </div>
 
           <div className={styles['weather__container__right__info']}>
@@ -69,7 +61,7 @@ const CurrentWeather = () => {
               alt="Cloud"
               style={{ filter: 'invert(100%)' }}
             />
-            <span>Wind speed {data?.wind?.speed}mph</span>
+            <span>Wind speed {weather?.wind?.speed}mph</span>
           </div>
 
           <div className={styles['weather__container__right__info']}>
@@ -78,7 +70,7 @@ const CurrentWeather = () => {
               alt="Cloud"
               style={{ filter: 'invert(100%)' }}
             />
-            <span>Pressure {data?.wind?.speed}mb</span>
+            <span>Pressure {weather?.wind?.speed}mb</span>
           </div>
         </div>
       </div>
