@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import styles from './CurrentWeather.module.scss';
 
 const CurrentWeather = () => {
-  const [data, setData] = useState([]);
+  const { data, isLoading } = useQuery({
+    queryKey: ['current-weather'],
+    queryFn: async () => {
+      const res = await fetch(
+        'https://api.openweathermap.org/data/2.5/weather?lat=42.6926003&lon=23.3557927&appid=8c8665dfe9c59d77eb1e4d54ad9490a1&units=metric'
+      );
+      return await res.json();
+    },
+  });
 
-  useEffect(() => {
-    fetch(
-      'https://api.openweathermap.org/data/2.5/weather?lat=42.6926003&lon=23.3557927&appid=8c8665dfe9c59d77eb1e4d54ad9490a1&units=metric'
-    )
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <>
