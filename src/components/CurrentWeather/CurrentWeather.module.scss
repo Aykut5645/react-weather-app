@@ -1,14 +1,5 @@
 @import 'src/styles/abstracts/mixins';
 
-.weather__title {
-  color: white;
-  font-size: 2rem;
-
-  @include respond(phone) {
-    text-align: center;
-  }
-}
-
 .weather__container {
   display: flex;
   gap: 8rem;

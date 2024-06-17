@@ -1,4 +1,10 @@
+@import 'src/styles/abstracts/mixins';
+
 .main {
   margin: auto;
   max-width: 85rem;
+
+  @include respond(phone) {
+    margin: auto 1rem;
+  }
 }

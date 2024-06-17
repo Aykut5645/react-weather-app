@@ -1,0 +1,10 @@
+@import "src/styles/abstracts/mixins";
+
+.heading {
+  color: white;
+  font-size: 2rem;
+
+  @include respond(phone) {
+    text-align: center;
+  }
+}
