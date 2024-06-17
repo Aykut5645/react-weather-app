@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Layout from './ui/Layout.tsx';
 import HomePage from './pages/HomePage.tsx';
 import DetailsPage from './pages/DetailsPage.tsx';
+import UnitContextProvider from './store/UnitContextProvider.tsx';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <RouterProvider router={router} />
+      <UnitContextProvider>
+        <RouterProvider router={router} />
+      </UnitContextProvider>
     </QueryClientProvider>
   );
 };
