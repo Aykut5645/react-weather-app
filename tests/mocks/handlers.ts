@@ -1,14 +1,18 @@
 import { http, HttpResponse } from 'msw';
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_KEY = import.meta.env.VITE_API_KEY
+
+console.log(BASE_URL)
 export const handlers = [
   http.get(
-    `${import.meta.env.VITE_API_BASE_URL}/weather?lat=42.6926003&lon=23.3557927&appid=8c8665dfe9c59d77eb1e4d54ad9490a1&units=metric`,
+    `${BASE_URL}/weather?lat=42.6926003&lon=23.3557927&appid=${API_KEY}&units=metric`,
     () => {
       return HttpResponse.json({
         code: '1',
         message: 0,
         cnt: 60,
-      })
+      });
       // return HttpResponse.json({
       //   cod: '200',
       //   message: 0,
