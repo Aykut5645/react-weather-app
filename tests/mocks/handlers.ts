@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 
 export const handlers = [
   http.get(
-    `hti.openweathermap.org/data/2.5/weather?lat=42.6926003&lon=23.3557927&appid=8c8665dfe9c59d77eb1e4d54ad9490a1&units=metric`,
+    `${import.meta.env.VITE_API_BASE_URL}/weather?lat=42.6926003&lon=23.3557927&appid=8c8665dfe9c59d77eb1e4d54ad9490a1&units=metric`,
     () => {
       return HttpResponse.json({
         code: '1',

@@ -1,8 +1,9 @@
 import { useCurrentWeather } from '../../hooks/useCurrentWeather.tsx';
-import styles from './CurrentWeather.module.scss';
 import { useUnit } from '../../hooks/useUnit.tsx';
 import { Unit } from '../../enum/UnitEnum.tsx';
 import { celciusToFahrenheit, kmToMile } from '../../utils/helpers.tsx';
+
+import styles from './CurrentWeather.module.scss';
 
 const CurrentWeather = () => {
   const { weather, isLoading, error } = useCurrentWeather();
