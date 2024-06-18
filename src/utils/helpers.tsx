@@ -9,6 +9,22 @@ export const getWeekDay = (dt: number) => {
   });
 };
 
+export const celciusToFahrenheit = (c: number) => {
+  return Math.round(c * (9 / 5) + 32);
+};
+
+export const fahrenheitToCelcius = (f: number) => {
+  return Math.round(((f - 32) * 5) / 9);
+};
+
+export const kmToMile = (n: number) => {
+  return Math.round(n / 1.60934);
+};
+
+export const mileToKm = (n: number) => {
+  return Math.round(n * 1.60934);
+};
+
 export const getDailyMiddayWeather = (data: ForecastResponseType) => {
   const today = new Date();
   const startOfTomorrow = new Date(today);

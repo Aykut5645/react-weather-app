@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
-import { getWeekDay } from '../../utils/helpers.tsx';
+import { celciusToFahrenheit, getWeekDay } from '../../utils/helpers.tsx';
 
+import { Unit } from '../../enum/UnitEnum.tsx';
+import { useUnit } from '../../hooks/useUnit.tsx';
 import styles from './WeatherCard.module.scss';
 
 type WeatherCardProps = {
@@ -12,6 +14,7 @@ type WeatherCardProps = {
 
 const WeatherCard = ({ dt, icon, temp }: WeatherCardProps) => {
   const currentWeekDay = getWeekDay(dt);
+  const { unit } = useUnit();
 
   return (
     <Link
@@ -29,7 +32,12 @@ const WeatherCard = ({ dt, icon, temp }: WeatherCardProps) => {
         </div>
         <div className={styles['card__container__temp']}>
           <b>Temp</b>
-          <span>{Math.round(temp)}&deg;</span>
+          <span>
+            {Math.round(
+              unit === Unit.CELSIUS ? temp : celciusToFahrenheit(temp)
+            )}
+            &deg;
+          </span>
         </div>
       </div>
     </Link>

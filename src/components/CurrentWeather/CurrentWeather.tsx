@@ -1,17 +1,31 @@
 import { useCurrentWeather } from '../../hooks/useCurrentWeather.tsx';
 import styles from './CurrentWeather.module.scss';
+import { useUnit } from '../../hooks/useUnit.tsx';
+import { Unit } from '../../enum/UnitEnum.tsx';
+import { celciusToFahrenheit, kmToMile } from '../../utils/helpers.tsx';
 
 const CurrentWeather = () => {
   const { weather, isLoading, error } = useCurrentWeather();
+  const { unit } = useUnit();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Something went wrong!</div>;
+
+  const temp =
+    unit === Unit.CELSIUS
+      ? weather!.main.temp
+      : celciusToFahrenheit(weather!.main.temp);
+
+  const feelsLike =
+    unit === Unit.CELSIUS
+      ? weather!.main.feels_like
+      : celciusToFahrenheit(weather!.main.feels_like);
 
   return (
     <div className={styles['weather__container']}>
       <div className={styles['weather__container__left']}>
         <div className={styles['weather__container__left__temp']}>
-          {Math.round(weather!.main?.temp)}&deg;
+          {Math.round(temp)}&deg;
         </div>
 
         <div className={styles['weather__container__left__icon']}>
@@ -26,12 +40,15 @@ const CurrentWeather = () => {
         <div className={styles['weather__container__right__header']}>
           <div>
             <b>Feels like</b>
-            <span>{weather?.main?.feels_like}&deg;</span>
+            <span>{feelsLike}&deg;</span>
           </div>
           <div>
             <b>Location</b>
             <span>
-              {weather?.name} / {weather?.sys?.country}
+              {weather?.name.includes('-')
+                ? weather.name.split('-')[0]
+                : weather?.name}{' '}
+              / {weather?.sys?.country}
             </span>
           </div>
         </div>
@@ -59,7 +76,13 @@ const CurrentWeather = () => {
             alt="Cloud"
             style={{ filter: 'invert(100%)' }}
           />
-          <span>Wind speed {weather?.wind?.speed}mph</span>
+          <span>
+            Wind speed{' '}
+            {unit === Unit.CELSIUS
+              ? weather!.wind.speed
+              : kmToMile(weather!.wind.speed)}
+            {unit === Unit.CELSIUS ? 'kph' : 'mph'}
+          </span>
         </div>
 
         <div className={styles['weather__container__right__info']}>
@@ -68,7 +91,7 @@ const CurrentWeather = () => {
             alt="Cloud"
             style={{ filter: 'invert(100%)' }}
           />
-          <span>Pressure {weather?.wind?.speed}mb</span>
+          <span>Pressure {weather?.main?.pressure}hPa</span>
         </div>
       </div>
     </div>
