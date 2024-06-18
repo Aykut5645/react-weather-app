@@ -1,18 +1,14 @@
 import { useState, useEffect } from 'react';
+import { CoordinatesType } from '../types/ForecastResponseType.tsx';
 
-type Location = {
-  lat: number;
-  lng: number;
-};
-
-const useLocation = () => {
-  const [location, setLocation] = useState<Location | null>(null);
+const useCoordinates = () => {
+  const [location, setLocation] = useState<CoordinatesType | null>(null);
 
   useEffect(() => {
     const success = (position: GeolocationPosition) => {
       setLocation({
         lat: position.coords.latitude,
-        lng: position.coords.longitude,
+        lon: position.coords.longitude,
       });
     };
 
@@ -26,4 +22,4 @@ const useLocation = () => {
   return location;
 };
 
-export default useLocation;
+export default useCoordinates;
