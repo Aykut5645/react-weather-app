@@ -6,7 +6,7 @@ const useCurrentWeather = () => {
   const coordinates = useCoordinates();
 
   const {
-    data: weather,
+    data: currentWeather,
     isLoading,
     error,
   } = useQuery({
@@ -14,7 +14,7 @@ const useCurrentWeather = () => {
     queryFn: fetchCurrentWeather.bind(null, coordinates!),
   });
 
-  return { weather, isLoading, error };
+  return { currentWeather, isLoading, error };
 };
 
 export { useCurrentWeather };

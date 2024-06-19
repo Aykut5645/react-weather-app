@@ -1,4 +1,3 @@
-import { getDailyMiddayWeather } from '../utils/helpers.tsx';
 import { CurrentWeatherResponseType } from '../types/CurrentWeatherResponseType.tsx';
 import {
   CoordinatesType,
@@ -18,12 +17,14 @@ const fetchCurrentWeather = async ({
   return await res.json();
 };
 
-const fetchForecast = async ({ lat, lon }: CoordinatesType) => {
+const fetchForecast = async ({
+  lat,
+  lon,
+}: CoordinatesType): Promise<ForecastResponseType> => {
   const res = await fetch(
     `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
   );
-  const data: ForecastResponseType = await res.json();
-  return getDailyMiddayWeather(data);
+  return await res.json();
 };
 
 export { fetchCurrentWeather, fetchForecast };

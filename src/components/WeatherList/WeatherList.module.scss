@@ -8,9 +8,11 @@
 
   @include respond(tab-port) {
     grid-template-columns: repeat(2, 1fr);
+    margin: auto 1rem;
   }
 
   @include respond(phone) {
     grid-template-columns: 1fr;
+    margin: 0;
   }
 }
