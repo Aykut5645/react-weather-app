@@ -7,23 +7,25 @@ import styles from './WeatherList.module.scss';
 const WeatherList = () => {
   const { forecast, isLoading, error } = useForecast();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Something went wrong!</div>;
+  if (isLoading)
+    return <div style={{ fontSize: 18, color: 'white' }}>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
 
   const modifiedForecast = getDailyMiddayWeather(forecast!);
 
   return (
-    <div className={styles.container}>
+    <ul className={styles.container}>
       {modifiedForecast?.map((w, i) => (
-        <WeatherCard
-          key={i}
-          dt={w?.dt}
-          icon={w?.icon}
-          temp={w?.temp}
-          date={w?.date}
-        />
+        <li key={i}>
+          <WeatherCard
+            dt={w?.dt}
+            icon={w?.icon}
+            temp={w?.temp}
+            date={w?.date}
+          />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

@@ -1,9 +1,5 @@
 .card__link {
   text-decoration: none;
-
-  & a:hover {
-    text-decoration: none;
-  }
 }
 
 .card__container {
@@ -16,6 +12,27 @@
   padding: 2rem 0;
   border-radius: 1rem;
   border: 2px solid black;
+
+  &:link,
+  &:visited {
+    color: lawngreen;
+    background-color: green;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+
+  &:hover,
+  &:active {
+    color: #55c57aff;
+    box-shadow: 0 1rem 2rem rgba(black, 0.4);
+    transform: rotate(5deg) scale(1.1);
+  }
+
+  & a:hover {
+    text-decoration: none;
+  }
 
   &__img {
     height: 8rem;

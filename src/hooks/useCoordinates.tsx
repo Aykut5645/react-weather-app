@@ -2,24 +2,26 @@ import { useState, useEffect } from 'react';
 import { CoordinatesType } from '../types/ForecastResponseType.tsx';
 
 const useCoordinates = () => {
-  const [location, setLocation] = useState<CoordinatesType | null>(null);
+  const [coordinates, setCoordinates] = useState<CoordinatesType | null>(null);
+  const [errorCoordinates, setErrorCoordinates] =
+    useState<GeolocationPositionError | null>(null);
 
   useEffect(() => {
     const success = (position: GeolocationPosition) => {
-      setLocation({
+      setCoordinates({
         lat: position.coords.latitude,
         lon: position.coords.longitude,
       });
     };
 
     const error = (err: GeolocationPositionError) => {
-      console.error('Error fetching location => ', err);
+      setErrorCoordinates(err);
     };
 
     navigator.geolocation.getCurrentPosition(success, error);
   }, []);
 
-  return location;
+  return { coordinates, errorCoordinates };
 };
 
 export default useCoordinates;
