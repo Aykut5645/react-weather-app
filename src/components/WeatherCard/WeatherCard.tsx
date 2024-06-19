@@ -16,6 +16,8 @@ const WeatherCard = ({ dt, icon, temp }: WeatherCardProps) => {
   const currentWeekDay = getWeekDay(dt);
   const { unit } = useUnit();
 
+  const currentTemp = unit === Unit.CELSIUS ? temp : celciusToFahrenheit(temp);
+
   return (
     <Link
       className={styles['card__link']}
@@ -33,9 +35,7 @@ const WeatherCard = ({ dt, icon, temp }: WeatherCardProps) => {
         <div className={styles['card__container__temp']}>
           <b>Temp</b>
           <span>
-            {Math.round(
-              unit === Unit.CELSIUS ? temp : celciusToFahrenheit(temp)
-            )}
+            {Math.round(currentTemp)}
             &deg;
           </span>
         </div>

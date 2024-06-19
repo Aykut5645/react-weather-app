@@ -3,12 +3,12 @@ import { useForecast } from '../../hooks/useForecast.tsx';
 import { getDailyMiddayWeather } from '../../utils/helpers.tsx';
 
 import styles from './WeatherList.module.scss';
+import Loader from '../../ui/Loader/Loader.tsx';
 
 const WeatherList = () => {
   const { forecast, isLoading, error } = useForecast();
 
-  if (isLoading)
-    return <div style={{ fontSize: 18, color: 'white' }}>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>{error.message}</div>;
 
   const modifiedForecast = getDailyMiddayWeather(forecast!);

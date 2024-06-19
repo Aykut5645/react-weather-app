@@ -1,10 +1,11 @@
 import WeatherContainer from '../WeatherContainer/WeatherContainer.tsx';
 import { useCurrentWeather } from '../../hooks/useCurrentWeather.tsx';
+import Loader from '../../ui/Loader/Loader.tsx';
 
 const CurrentWeather = () => {
   const { currentWeather, isLoading, error } = useCurrentWeather();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>Something went wrong!</div>;
 
   const { main, weather, sys, wind, name } = currentWeather!;
