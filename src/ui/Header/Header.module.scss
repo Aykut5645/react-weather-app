@@ -1,7 +1,16 @@
+@import 'src/styles/abstracts/variables';
+
 .header {
   color: white;
   background: #151515;
   padding: 1rem 0;
   text-align: center;
   margin-bottom: 3rem;
+  font-family: cursive;
+  letter-spacing: 0.2rem;
+
+  .link {
+    text-decoration: none;
+    color: $color-primary;
+  }
 }

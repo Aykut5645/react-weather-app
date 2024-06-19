@@ -19,28 +19,30 @@ const WeatherCard = ({ dt, icon, temp }: WeatherCardProps) => {
   const currentTemp = unit === Unit.CELSIUS ? temp : celciusToFahrenheit(temp);
 
   return (
-    <Link
-      className={styles['card__link']}
-      to={`/${currentWeekDay.toLocaleLowerCase()}`}
-    >
-      <div className={styles['card__container']}>
-        <div className={styles['card__container__day']}>{currentWeekDay}</div>
-        <div className={styles['card__container__img']}>
-          <img
-            alt="weather icon"
-            className="weather-icon"
-            src={`src/assets/icons/${icon}.png`}
-          />
+    <li>
+      <Link
+        className={styles['card__link']}
+        to={`/${currentWeekDay.toLocaleLowerCase()}`}
+      >
+        <div className={styles['card__container']}>
+          <div className={styles['card__container__day']}>{currentWeekDay}</div>
+          <div className={styles['card__container__img']}>
+            <img
+              alt="weather icon"
+              className="weather-icon"
+              src={`src/assets/icons/${icon}.png`}
+            />
+          </div>
+          <div className={styles['card__container__temp']}>
+            <b>Temp</b>
+            <span>
+              {Math.round(currentTemp)}
+              &deg;
+            </span>
+          </div>
         </div>
-        <div className={styles['card__container__temp']}>
-          <b>Temp</b>
-          <span>
-            {Math.round(currentTemp)}
-            &deg;
-          </span>
-        </div>
-      </div>
-    </Link>
+      </Link>
+    </li>
   );
 };
 

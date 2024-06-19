@@ -1,10 +1,20 @@
-@import "src/styles/abstracts/mixins";
+@import 'src/styles/abstracts/mixins';
 
-.heading {
-  color: white;
-  font-size: 2rem;
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.4rem;
 
-  @include respond(phone) {
-    text-align: center;
+  @include respond(tab-port) {
+    margin: auto 1rem;
+  }
+
+  .heading {
+    color: white;
+    font-size: 2rem;
+
+    @include respond(phone) {
+      text-align: center;
+    }
   }
 }

@@ -1,33 +1,35 @@
 @import 'src/styles/abstracts/mixins';
-//@import "src/styles/abstracts/variables;
+@import 'src/styles/abstracts/variables';
 
 .container {
   @include absCenter;
 
   .loader {
-    width: 4rem;
-    aspect-ratio: 1;
+    width: 108px;
+    height: 60px;
+    color: $color-primary;
+    --c: radial-gradient(farthest-side, currentColor 96%, #0000);
+    background:
+      var(--c) 100% 100% /30% 60%,
+      var(--c) 70% 0 /50% 100%,
+      var(--c) 0 100% /36% 68%,
+      var(--c) 27% 18% /26% 40%,
+      linear-gradient(currentColor 0 0) bottom/67% 58%;
+    background-repeat: no-repeat;
     position: relative;
-    transform: rotate(45deg);
 
-    &:before,
     &:after {
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: 50% 50% 0 50%;
-      background: #55c57aff;
-      -webkit-mask: radial-gradient(circle 10px at 50% 50%, #0000 94%, #000);
+      background: inherit;
+      opacity: 0.4;
+      animation: l7 1s infinite;
     }
 
-    &:after {
-      animation: l6 1s infinite;
-      transform: perspective(30rem) translateZ(0px);
-    }
-
-    @keyframes l6 {
+    @keyframes l7 {
       to {
-        transform: perspective(30rem) translateZ(15rem);
+        transform: scale(1.8);
         opacity: 0;
       }
     }

@@ -16,14 +16,13 @@ const WeatherList = () => {
   return (
     <ul className={styles.container}>
       {modifiedForecast?.map((w, i) => (
-        <li key={i}>
-          <WeatherCard
-            dt={w?.dt}
-            icon={w?.icon}
-            temp={w?.temp}
-            date={w?.date}
-          />
-        </li>
+        <WeatherCard
+          key={i}
+          dt={w?.dt}
+          icon={w?.icon}
+          temp={w?.temp}
+          date={w?.date}
+        />
       ))}
     </ul>
   );
