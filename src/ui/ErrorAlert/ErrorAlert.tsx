@@ -9,7 +9,7 @@ type ErrorAlertProps = {
 const ErrorAlert = ({ statusCode, errorMessage }: ErrorAlertProps) => {
   return (
     <div className={styles.container}>
-      <h1 className={styles.status}>{statusCode || 404}</h1>
+      <h1 className={styles.status}>{statusCode}</h1>
       <h1>{errorMessage || 'Something went wrong.'}</h1>
     </div>
   );

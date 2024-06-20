@@ -1,12 +1,34 @@
+import { useQuery } from '@tanstack/react-query';
+
 import WeatherContainer from '../WeatherContainer/WeatherContainer.tsx';
-import { useCurrentWeather } from '../../hooks/useCurrentWeather.tsx';
 import Loader from '../../ui/Loader/Loader.tsx';
+import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
+import useCoordinates from '../../hooks/useCoordinates.tsx';
+import { fetchCurrentWeather } from '../../services/api.tsx';
 
 const CurrentWeather = () => {
-  const { currentWeather, isLoading, error } = useCurrentWeather();
+  const { coordinates, errorCoordinates } = useCoordinates();
+  const {
+    data: currentWeather,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['current-weather'],
+    queryFn: () => fetchCurrentWeather(coordinates!),
+    enabled: Boolean(coordinates),
+  });
 
-  if (isLoading) return <Loader />;
-  if (error) return <div>Something went wrong!</div>;
+  console.log('Coordinates => ', coordinates);
+
+  if (Boolean(coordinates === null && errorCoordinates === null) || isLoading) {
+    return <Loader />;
+  }
+
+  if (errorCoordinates || error) {
+    return (
+      <ErrorAlert errorMessage={errorCoordinates?.message || error?.message} />
+    );
+  }
 
   const { main, weather, sys, wind, name } = currentWeather!;
 

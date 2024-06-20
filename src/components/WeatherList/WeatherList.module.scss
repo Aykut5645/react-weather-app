@@ -9,7 +9,7 @@
 
   @include respond(tab-port) {
     grid-template-columns: repeat(2, 1fr);
-    margin: auto 1rem;
+    margin: 4rem 1rem;
   }
 
   @include respond(phone) {

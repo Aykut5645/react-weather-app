@@ -1,18 +1,35 @@
 import { useParams } from 'react-router';
+import { useQuery } from '@tanstack/react-query';
 
-import { getWeekDay } from '../../utils/helpers.tsx';
-import { useForecast } from '../../hooks/useForecast.tsx';
-import WeatherContainer from '../WeatherContainer/WeatherContainer.tsx';
-import { ForecastListType } from '../../types/ForecastResponseType.tsx';
 import Loader from '../../ui/Loader/Loader.tsx';
+import Heading from '../../ui/Heading/Heading.tsx';
+import WeatherContainer from '../WeatherContainer/WeatherContainer.tsx';
+import { getWeekDay } from '../../utils/helpers.tsx';
+import { fetchForecast } from '../../services/api.tsx';
+import useCoordinates from '../../hooks/useCoordinates.tsx';
+import { ForecastListType } from '../../types/ForecastResponseType.tsx';
+import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
 import NavButton from '../../ui/NavButton/NavButton.tsx';
 
 const WeatherDetails = () => {
   const { weekDay } = useParams();
-  const { forecast, isLoading, error } = useForecast();
+  const { coordinates, errorCoordinates } = useCoordinates();
+  const {
+    data: forecast,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['forecast'],
+    queryFn: () => fetchForecast(coordinates!),
+    enabled: Boolean(coordinates),
+  });
 
-  if (isLoading) return <Loader />;
-  if (error) return <div>Something went wrong!</div>;
+  if (Boolean(coordinates === null && errorCoordinates === null) || isLoading)
+    return <Loader />;
+  if (errorCoordinates || error)
+    return (
+      <ErrorAlert errorMessage={errorCoordinates?.message || error?.message} />
+    );
 
   const { list, city } = forecast!;
 
@@ -22,10 +39,11 @@ const WeatherDetails = () => {
     )
     .find((x) => x.dt_txt.includes('12:00:00'));
 
-  const { main, weather, wind } = currentDay!;
+  const { dt, main, weather, wind } = currentDay!;
 
   return (
     <>
+      <Heading>{getWeekDay(dt)}</Heading>
       <WeatherContainer
         temp={main.temp}
         icon={weather[0].icon}
@@ -38,7 +56,7 @@ const WeatherDetails = () => {
         humidity={main.humidity}
         pressure={main.pressure}
       />
-      <NavButton text="Go Back"/>
+      <NavButton text="Go back" />
     </>
   );
 };

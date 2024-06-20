@@ -16,7 +16,6 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <HomePage />,
-        errorElement: <PageNotFound/>
       },
       {
         path: '/:weekDay',
