@@ -1,31 +1,21 @@
 import { useParams } from 'react-router';
-import { useQuery } from '@tanstack/react-query';
 
 import Loader from '../../ui/Loader/Loader.tsx';
 import Heading from '../../ui/Heading/Heading.tsx';
+import NavButton from '../../ui/NavButton/NavButton.tsx';
+import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
 import WeatherContainer from '../WeatherContainer/WeatherContainer.tsx';
 import { getWeekDay } from '../../utils/helpers.tsx';
-import { fetchForecast } from '../../services/api.tsx';
 import useCoordinates from '../../hooks/useCoordinates.tsx';
 import { ForecastListType } from '../../types/ForecastResponseType.tsx';
-import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
-import NavButton from '../../ui/NavButton/NavButton.tsx';
+import { useForecast } from '../../hooks/useForecast.tsx';
 
 const WeatherDetails = () => {
   const { weekDay } = useParams();
   const { coordinates, errorCoordinates } = useCoordinates();
-  const {
-    data: forecast,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['forecast'],
-    queryFn: () => fetchForecast(coordinates!),
-    enabled: Boolean(coordinates),
-  });
+  const { forecast, isLoading, error } = useForecast(coordinates);
 
-  if (Boolean(coordinates === null && errorCoordinates === null) || isLoading)
-    return <Loader />;
+  if ((!coordinates && !errorCoordinates) || isLoading) return <Loader />;
   if (errorCoordinates || error)
     return (
       <ErrorAlert errorMessage={errorCoordinates?.message || error?.message} />

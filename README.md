@@ -1,30 +1,51 @@
-# React + TypeScript + Vite
+# React Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live Demo
 
-Currently, two official plugins are available:
+This application is deployed on Netlify: https://precious-trifle-d496c3.netlify.app
+ 
+## About the project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Tech Stack**
+ - React.js
+ - TypeScript
+ - Vite
+ - SCSS
+ - Ant Design
+ - React Router Dom
 
-## Expanding the ESLint configuration
+ **Features**
+ - Persistent note storage using local storage
+ - Responsive and interactive UI with Ant Design
+ - Link creation within notes
+ - Create, Edit, and Delete notes for ultimate control
+ - Paginated note listing for large datasets
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+ **Pages**
 
-- Configure the top-level `parserOptions` property like this:
+|Routes                     |Description                                 |
+|---------------------------|--------------------------------------------|
+|**/**                      |`Current weather + forecast for next 4 days`|
+|**/:weekDay**              |`Weather details for selected day`          |
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Getting Started
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+**Prerequisites**
+
+1. Ensure you have Node.js and npm installed on your system. You can download them from the official websites:
+    - Node.js: https://nodejs.org/
+    - npm: https://www.npmjs.com/ (comes bundled with Node.js)
+
+**Installation**
+ - Clone the repository or download the source code.
+ - Install dependencies using `npm install`.
+ - Start the development server using `npm run dev`. This will typically launch the application in your browser at `http:localhost:5173`.
+ **Note:** If you see a different port number in your terminal output, use that port instead of `5173` in the URL.
+
+**Usage**
+ - Use the interface to create, edit, delete notes, and navigate between pages.
+ - Notes are automatically saved to local storage and persist across browser refreshes.
+
+## Licence
+
+Distributed under the MIT License. See `LICENSE` for more information.
