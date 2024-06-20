@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import MetricSwitcher from '../../components/MetricSwitcher/MetricSwitcher.tsx';
+import ScaleSwitcher from '../../components/ScaleSwitcher/ScaleSwitcher.tsx';
 
 import styles from './Heading.module.scss';
 
@@ -11,7 +11,7 @@ const Heading = ({ children }: HeadingProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.heading}>{children}</div>
-      <MetricSwitcher />
+      <ScaleSwitcher />
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import { Unit } from '../../enum/UnitEnum.tsx';
-import { useUnit } from '../../hooks/useUnit.tsx';
+import { TempScale } from '../../utils/enums.tsx';
+import { useScale } from '../../hooks/useScale.tsx';
 import { celciusToFahrenheit, kmToMile } from '../../utils/helpers.tsx';
 
 import styles from './WeatherContainer.module.scss';
@@ -29,13 +29,14 @@ const WeatherContainer = ({
   humidity,
   pressure,
 }: WeatherContainerProps) => {
-  const { unit } = useUnit();
+  const { scale } = useScale();
 
-  const currentTemp = unit === Unit.CELSIUS ? temp : celciusToFahrenheit(temp);
+  const currentTemp =
+    scale === TempScale.CELSIUS ? temp : celciusToFahrenheit(temp);
   const currentFeelsLike =
-    unit === Unit.CELSIUS ? feelsLike : celciusToFahrenheit(feelsLike);
+    scale === TempScale.CELSIUS ? feelsLike : celciusToFahrenheit(feelsLike);
   const currentWindSpeed =
-    unit === Unit.CELSIUS ? windSpeed : kmToMile(windSpeed);
+    scale === TempScale.CELSIUS ? windSpeed : kmToMile(windSpeed);
   const currentCityName = cityName.includes('-')
     ? cityName.split('-')[0]
     : cityName;
@@ -90,7 +91,7 @@ const WeatherContainer = ({
           />
           <span>
             Wind speed {currentWindSpeed}
-            {unit === Unit.CELSIUS ? 'kph' : 'mph'}
+            {scale === TempScale.CELSIUS ? 'kph' : 'mph'}
           </span>
         </div>
 

@@ -7,7 +7,7 @@ import Layout from './ui/Layout.tsx';
 import HomePage from './pages/HomePage.tsx';
 import DetailsPage from './pages/DetailsPage.tsx';
 import PageNotFound from './pages/PageNotFound.tsx';
-import UnitContextProvider from './store/UnitContextProvider.tsx';
+import ScaleContextProvider from './store/ScaleContextProvider.tsx';
 
 const router = createBrowserRouter([
   {
@@ -33,9 +33,9 @@ const App = () => {
   return (
     <QueryClientProvider client={client}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <UnitContextProvider>
+      <ScaleContextProvider>
         <RouterProvider router={router} />
-      </UnitContextProvider>
+      </ScaleContextProvider>
     </QueryClientProvider>
   );
 };

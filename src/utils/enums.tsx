@@ -1,4 +1,4 @@
-export const enum Unit {
+export enum TempScale {
   CELSIUS = 'celsius',
   FAHRENHEIT = 'fahrenheit',
 }
