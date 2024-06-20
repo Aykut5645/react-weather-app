@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import styles from './Goback.module.scss';
+import styles from './NavButton.module.scss';
 
-const GoBack = () => {
+const NavButton = ({ text }: { text: string }) => {
   return (
     <div className={styles['container']}>
       <Link to="/" className={styles['btn-text']}>
-        &larr; Go back
+        &larr; {text}
       </Link>
     </div>
   );
 };
 
-export default GoBack;
+export default NavButton;

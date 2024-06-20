@@ -5,7 +5,7 @@ import { useForecast } from '../../hooks/useForecast.tsx';
 import WeatherContainer from '../WeatherContainer/WeatherContainer.tsx';
 import { ForecastListType } from '../../types/ForecastResponseType.tsx';
 import Loader from '../../ui/Loader/Loader.tsx';
-import GoBack from '../../ui/GoBack/GoBack.tsx';
+import NavButton from '../../ui/NavButton/NavButton.tsx';
 
 const WeatherDetails = () => {
   const { weekDay } = useParams();
@@ -38,7 +38,7 @@ const WeatherDetails = () => {
         humidity={main.humidity}
         pressure={main.pressure}
       />
-      <GoBack />
+      <NavButton text="Go Back"/>
     </>
   );
 };
