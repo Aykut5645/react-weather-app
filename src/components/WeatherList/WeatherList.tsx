@@ -13,6 +13,7 @@ const WeatherList = () => {
 
   if (Boolean(errorCoordinates === null && coordinates === null) || isLoading)
     return <Loader />;
+
   if (errorCoordinates || error)
     return (
       <ErrorAlert errorMessage={errorCoordinates?.message || error?.message} />
@@ -22,6 +23,7 @@ const WeatherList = () => {
 
   return (
     <ul className={styles.container}>
+      {/*<li>Hello</li>*/}
       {modifiedForecast?.map((w, i) => (
         <WeatherCard
           key={i}

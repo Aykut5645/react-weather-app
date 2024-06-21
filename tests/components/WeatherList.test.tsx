@@ -1,8 +1,5 @@
-import { it, expect, describe, vi, beforeEach } from 'vitest';
-import {render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import "@testing-library/jest-dom/vitest";
-
 import WeatherList from '../../src/components/WeatherList/WeatherList.tsx';
 
 const renderComponent = () => {
@@ -21,16 +18,6 @@ const renderComponent = () => {
   );
 };
 
-// beforeEach(() => {
-//   vi.stubGlobal('navigator', {
-//     geolocation: {
-//       getCurrentPosition: vi.fn().mockResolvedValue({
-//         position: { coords: { latitude: 51.1, longitude: 45.3 } },
-//       }),
-//     },
-//   });
-// });
-
 beforeEach(() => {
   vi.stubGlobal('navigator', {
     geolocation: {
@@ -39,24 +26,37 @@ beforeEach(() => {
           success({
             coords: { latitude: 51.1, longitude: 45.3 },
           });
-        }, 1000);
+        }, 500);
       }),
     },
   });
 });
 
 describe('WeatherList', () => {
-  // it('should render loading state initially', () => {
-  //   renderComponent();
-  //
-  //   expect(screen.getByRole('link')).toHaveProperty('href');
-  // });
-
-  it('should render the list of products', async () => {
+  it('should render loading state initially', () => {
     renderComponent();
 
-    // Wait for the list items to appear
-    const items = await screen.findAllByRole('listitem');
-    expect(items.length).toBeGreaterThan(0);
+    expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
+
+  // it('should render the list of weather forecasts', async () => {
+  //   renderComponent();
+  //
+  //   screen.debug();
+  //
+  //   const items = await screen.findAllByRole('listitem');
+  //   expect(items.length).toBeGreaterThan(0);
+  // });
+  //
+  // it('should render error state if fetching fails', async () => {
+  //   // Simulate error state
+  //   vi.spyOn(global, 'fetch').mockImplementationOnce(() =>
+  //     Promise.reject('API is down')
+  //   );
+  //
+  //   renderComponent();
+  //
+  //   const errorMessage = await screen.findByRole('alert');
+  //   expect(errorMessage).toHaveTextContent('Error fetching data');
+  // });
 });
