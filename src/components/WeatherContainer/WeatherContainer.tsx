@@ -42,7 +42,7 @@ const WeatherContainer = ({
     : cityName;
 
   return (
-    <div className={styles['weather__container']}>
+    <div className={styles['weather__container']} data-testid="current-weather">
       <div className={styles['weather__container__left']}>
         <div className={styles['weather__container__left__temp']}>
           {Math.round(currentTemp)}&deg;

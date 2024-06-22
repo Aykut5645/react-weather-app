@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import ScaleContextProvider from '../../src/store/ScaleContextProvider.tsx';
-import { BrowserRouter } from 'react-router-dom';
 import useCoordinates from '../../src/hooks/useCoordinates.tsx';
 import CurrentWeather from '../../src/components/CurrentWeather/CurrentWeather.tsx';
 
@@ -19,13 +18,11 @@ const renderComponent = () => {
   });
 
   render(
-    <BrowserRouter>
-      <QueryClientProvider client={client}>
-        <ScaleContextProvider>
-          <CurrentWeather />
-        </ScaleContextProvider>
-      </QueryClientProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={client}>
+      <ScaleContextProvider>
+        <CurrentWeather />
+      </ScaleContextProvider>
+    </QueryClientProvider>
   );
 };
 
@@ -37,15 +34,14 @@ describe('CurrentWeather', () => {
     });
   });
 
-  it('should render the list of weather forecast', async () => {
+  it('should render the current day weather', async () => {
     renderComponent();
 
-    const items = await screen.findAllByRole('listitem');
-
-    expect(items.length).toBeGreaterThan(0);
+    const currentWeather = await screen.findByTestId('current-weather');
+    expect(currentWeather).toBeInTheDocument();
   });
 
-  it('should render loading state initially', () => {
+  it('should render loading state initially', async () => {
     renderComponent();
 
     expect(screen.getByTestId('loader')).toBeInTheDocument();

@@ -1,5 +1,3 @@
-import { useParams } from 'react-router';
-
 import Loader from '../../ui/Loader/Loader.tsx';
 import NavButton from '../../ui/NavButton/NavButton.tsx';
 import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
@@ -9,8 +7,18 @@ import useCoordinates from '../../hooks/useCoordinates.tsx';
 import { ForecastListType } from '../../types/ForecastResponseType.tsx';
 import { useForecast } from '../../hooks/useForecast.tsx';
 
-const WeatherDetails = () => {
-  const { weekDay } = useParams();
+const getCurrentDayMiddayWeather = (
+  list: ForecastListType[],
+  weekDay: string
+) => {
+  return list
+    .filter(
+      (f: ForecastListType) => getWeekDay(f.dt).toLocaleLowerCase() === weekDay
+    )
+    .find((f) => f.dt_txt.includes('12:00:00'));
+};
+
+const WeatherDetails = ({ weekDay }: { weekDay: string }) => {
   const { coordinates, errorCoordinates } = useCoordinates();
   const { forecast, isLoading, error } = useForecast(coordinates);
 
@@ -21,12 +29,7 @@ const WeatherDetails = () => {
     );
 
   const { list, city } = forecast!;
-
-  const currentDay = list
-    .filter(
-      (x: ForecastListType) => getWeekDay(x.dt).toLocaleLowerCase() === weekDay
-    )
-    .find((x) => x.dt_txt.includes('12:00:00'));
+  const currentDay = getCurrentDayMiddayWeather(list, weekDay);
 
   const { main, weather, wind } = currentDay!;
 

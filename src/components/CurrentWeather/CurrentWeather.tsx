@@ -8,7 +8,7 @@ const CurrentWeather = () => {
   const { coordinates, errorCoordinates } = useCoordinates();
   const { currentWeather, isLoading, error } = useCurrentWeather(coordinates);
 
-  if (Boolean(coordinates === null && errorCoordinates === null) || isLoading) {
+  if ((!coordinates && !errorCoordinates) || isLoading) {
     return <Loader />;
   }
   if (errorCoordinates || error) {

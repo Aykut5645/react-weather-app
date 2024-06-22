@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import WeatherList from '../../src/components/WeatherList/WeatherList.tsx';
 import ScaleContextProvider from '../../src/store/ScaleContextProvider.tsx';
-import { BrowserRouter } from 'react-router-dom';
 import useCoordinates from '../../src/hooks/useCoordinates.tsx';
+import WeatherDetails from '../../src/components/WeatherDetails/WeatherDetails.tsx';
+import { BrowserRouter } from 'react-router-dom';
 
 // Mock the useCoordinates hook
 vi.mock('../../src/hooks/useCoordinates.tsx');
@@ -22,14 +22,14 @@ const renderComponent = () => {
     <BrowserRouter>
       <QueryClientProvider client={client}>
         <ScaleContextProvider>
-          <WeatherList />
+          <WeatherDetails weekDay="monday" />
         </ScaleContextProvider>
       </QueryClientProvider>
-    // </BrowserRouter>
+    </BrowserRouter>
   );
 };
 
-describe('WeatherList', () => {
+describe('WeatherDetails', () => {
   beforeEach(() => {
     vi.mocked(useCoordinates).mockReturnValue({
       coordinates: { lat: 0, lon: 0 },
@@ -37,15 +37,18 @@ describe('WeatherList', () => {
     });
   });
 
-  it('should render the list of weather forecast', async () => {
+  it('should render the details for selected weather', async () => {
     renderComponent();
 
-    const items = await screen.findAllByRole('listitem');
+    const currentWeatherDetails = await screen.findByTestId('current-weather');
+    const goBackLink = await screen.getByRole('link');
 
-    expect(items.length).toBeGreaterThan(0);
+    expect(currentWeatherDetails).toBeInTheDocument();
+    expect(goBackLink).toHaveTextContent(/go back/i);
+    screen.debug();
   });
 
-  it('should render loading state initially', () => {
+  it('should render loading state initially', async () => {
     renderComponent();
 
     expect(screen.getByTestId('loader')).toBeInTheDocument();

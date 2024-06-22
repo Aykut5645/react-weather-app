@@ -6,15 +6,18 @@ import WeatherDetails from '../components/WeatherDetails/WeatherDetails.tsx';
 import { getNextFourDaysOfWeek } from '../utils/helpers.tsx';
 
 const DetailsPage = () => {
-  const { weekDay } = useParams();
+  const { weekDay } = useParams<{ weekDay?: string }>();
 
-  if (!getNextFourDaysOfWeek().some((wd) => wd === weekDay))
+  if (!weekDay || !getNextFourDaysOfWeek().includes(weekDay)) {
     return <PageNotFound />;
+  }
+
+  const heading = weekDay.charAt(0).toUpperCase() + weekDay.slice(1);
 
   return (
     <>
-      <Heading>{weekDay![0].toLocaleUpperCase() + weekDay!.slice(1)}</Heading>
-      <WeatherDetails />
+      <Heading>{heading}</Heading>
+      <WeatherDetails weekDay={weekDay} />
     </>
   );
 };

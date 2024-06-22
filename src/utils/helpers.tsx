@@ -68,6 +68,17 @@ export const getDailyMiddayWeather = (data: ForecastResponseType) => {
   });
 };
 
+export const getCurrentDayMiddayWeather = (
+  list: ForecastListType[],
+  weekDay: string
+) => {
+  return list
+    .filter(
+      (f: ForecastListType) => getWeekDay(f.dt).toLocaleLowerCase() === weekDay
+    )
+    .find((f) => f.dt_txt.includes('12:00:00'));
+};
+
 export const navigateTo = (path: string) => {
   const router = createMemoryRouter(routesObjects, {
     initialEntries: [path],
