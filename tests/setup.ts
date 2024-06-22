@@ -1,19 +1,22 @@
 import '@testing-library/jest-dom/vitest';
 import { afterAll, afterEach, beforeAll } from 'vitest';
 
+// Set up MSW server
 import { server } from './mocks/server';
 
-beforeAll(() => server.listen());
+beforeAll(() => server.listen({ onUnhandledRequest: 'bypass' }));
 
+// Mock the global navigator.geolocation
 beforeEach(() => {
   vi.stubGlobal('navigator', {
     geolocation: {
       getCurrentPosition: vi.fn().mockImplementationOnce((success) => {
-        setTimeout(() => {
-          success({
-            coords: { latitude: 51.1, longitude: 45.3 },
-          });
-        }, 500);
+        success({
+          coords: {
+            latitude: 0,
+            longitude: 0,
+          },
+        });
       }),
     },
   });

@@ -7,6 +7,7 @@ import ScaleContextProvider from '../../src/store/ScaleContextProvider.tsx';
 import { useScale } from '../../src/hooks/useScale.tsx';
 import { TempScale } from '../../src/utils/enums.tsx';
 
+// Mock the useScale hook
 vi.mock('../../src/hooks/useScale.tsx');
 
 const renderComponent = () => {

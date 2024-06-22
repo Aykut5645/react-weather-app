@@ -13,7 +13,7 @@ const DetailsPage = () => {
 
   return (
     <>
-      <Heading>{weekDay}</Heading>
+      <Heading>{weekDay![0].toLocaleUpperCase() + weekDay!.slice(1)}</Heading>
       <WeatherDetails />
     </>
   );

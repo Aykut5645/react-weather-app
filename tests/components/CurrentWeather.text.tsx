@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import WeatherList from '../../src/components/WeatherList/WeatherList.tsx';
 import ScaleContextProvider from '../../src/store/ScaleContextProvider.tsx';
 import { BrowserRouter } from 'react-router-dom';
 import useCoordinates from '../../src/hooks/useCoordinates.tsx';
+import CurrentWeather from '../../src/components/CurrentWeather/CurrentWeather.tsx';
 
 // Mock the useCoordinates hook
 vi.mock('../../src/hooks/useCoordinates.tsx');
@@ -22,14 +22,14 @@ const renderComponent = () => {
     <BrowserRouter>
       <QueryClientProvider client={client}>
         <ScaleContextProvider>
-          <WeatherList />
+          <CurrentWeather />
         </ScaleContextProvider>
       </QueryClientProvider>
     </BrowserRouter>
   );
 };
 
-describe('WeatherList', () => {
+describe('CurrentWeather', () => {
   beforeEach(() => {
     vi.mocked(useCoordinates).mockReturnValue({
       coordinates: { lat: 0, lon: 0 },
