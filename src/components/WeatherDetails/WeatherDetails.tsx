@@ -1,7 +1,6 @@
 import { useParams } from 'react-router';
 
 import Loader from '../../ui/Loader/Loader.tsx';
-import Heading from '../../ui/Heading/Heading.tsx';
 import NavButton from '../../ui/NavButton/NavButton.tsx';
 import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
 import WeatherContainer from '../WeatherContainer/WeatherContainer.tsx';
@@ -29,11 +28,10 @@ const WeatherDetails = () => {
     )
     .find((x) => x.dt_txt.includes('12:00:00'));
 
-  const { dt, main, weather, wind } = currentDay!;
+  const { main, weather, wind } = currentDay!;
 
   return (
     <>
-      <Heading>{getWeekDay(dt)}</Heading>
       <WeatherContainer
         temp={main.temp}
         icon={weather[0].icon}

@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <>
       <Heading>Current Weather</Heading>
-      <CurrentWeather />
+      {/*<CurrentWeather />*/}
       <WeatherList />
     </>
   );

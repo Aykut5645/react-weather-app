@@ -1,41 +1,11 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { RouterProvider } from 'react-router';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
+import Providers from './Providers.tsx';
 import Layout from './ui/Layout.tsx';
-import HomePage from './pages/HomePage.tsx';
-import DetailsPage from './pages/DetailsPage.tsx';
-import PageNotFound from './pages/PageNotFound.tsx';
-import ScaleContextProvider from './store/ScaleContextProvider.tsx';
-
-const router = createBrowserRouter([
-  {
-    element: <Layout />,
-    children: [
-      {
-        path: '/',
-        element: <HomePage />,
-      },
-      {
-        path: '/:weekDay',
-        element: <DetailsPage />,
-        errorElement: <PageNotFound/>
-      },
-    ],
-  },
-]);
-
-const client = new QueryClient();
 
 const App = () => {
   return (
-    <QueryClientProvider client={client}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <ScaleContextProvider>
-        <RouterProvider router={router} />
-      </ScaleContextProvider>
-    </QueryClientProvider>
+    <Providers>
+      <Layout />
+    </Providers>
   );
 };
 
