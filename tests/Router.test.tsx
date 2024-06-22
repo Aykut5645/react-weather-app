@@ -1,7 +1,4 @@
-import { createMemoryRouter, RouterProvider } from 'react-router';
-import { render, screen } from '@testing-library/react';
-
-import { routesObjects } from '../src/routes.tsx';
+import { screen } from '@testing-library/react';
 import { navigateTo } from '../src/utils/helpers.tsx';
 
 describe('Router', () => {
