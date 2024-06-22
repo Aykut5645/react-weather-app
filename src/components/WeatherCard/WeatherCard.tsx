@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { celciusToFahrenheit, getWeekDay } from '../../utils/helpers.tsx';
+import { celsiusToFahrenheit, getWeekDay } from '../../utils/helpers.tsx';
 
 import { TempScale } from '../../utils/enums.tsx';
 import { useScale } from '../../hooks/useScale.tsx';
@@ -16,7 +16,7 @@ const WeatherCard = ({ dt, icon, temp }: WeatherCardProps) => {
   const currentWeekDay = getWeekDay(dt);
   const { scale } = useScale();
 
-  const currentTemp = scale === TempScale.CELSIUS ? temp : celciusToFahrenheit(temp);
+  const currentTemp = scale === TempScale.CELSIUS ? temp : celsiusToFahrenheit(temp);
 
   return (
     <li>

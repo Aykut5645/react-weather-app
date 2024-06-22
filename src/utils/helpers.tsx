@@ -1,7 +1,12 @@
+import { createMemoryRouter, RouterProvider } from 'react-router';
+import { render } from '@testing-library/react';
+
 import {
   ForecastListType,
   ForecastResponseType,
 } from '../types/ForecastResponseType.tsx';
+import { routesObjects } from '../routes.tsx';
+import { WEEK_DAYS } from './constants.tsx';
 
 export const getWeekDay = (dt: number) => {
   return new Date(dt * 1000).toLocaleString('en-us', {
@@ -9,20 +14,17 @@ export const getWeekDay = (dt: number) => {
   });
 };
 
-export const celciusToFahrenheit = (c: number) => {
-  return Math.round(c * (9 / 5) + 32);
+export const getNextFourDaysOfWeek = () => {
+  const today = new Date().getDay();
+  return WEEK_DAYS.slice(today, WEEK_DAYS.length).concat(WEEK_DAYS.slice(0, 3));
 };
 
-export const fahrenheitToCelcius = (f: number) => {
-  return Math.round(((f - 32) * 5) / 9);
+export const celsiusToFahrenheit = (c: number) => {
+  return Math.round(c * (9 / 5) + 32);
 };
 
 export const kmToMile = (n: number) => {
   return Math.round(n / 1.60934);
-};
-
-export const mileToKm = (n: number) => {
-  return Math.round(n * 1.60934);
 };
 
 export const getDailyMiddayWeather = (data: ForecastResponseType) => {
@@ -64,4 +66,12 @@ export const getDailyMiddayWeather = (data: ForecastResponseType) => {
       icon: middayEntry.weather[0].icon,
     };
   });
+};
+
+export const navigateTo = (path: string) => {
+  const router = createMemoryRouter(routesObjects, {
+    initialEntries: [path],
+  });
+
+  render(<RouterProvider router={router} />);
 };

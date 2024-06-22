@@ -1,6 +1,6 @@
 import { TempScale } from '../../utils/enums.tsx';
 import { useScale } from '../../hooks/useScale.tsx';
-import { celciusToFahrenheit, kmToMile } from '../../utils/helpers.tsx';
+import { celsiusToFahrenheit, kmToMile } from '../../utils/helpers.tsx';
 
 import styles from './WeatherContainer.module.scss';
 
@@ -32,9 +32,9 @@ const WeatherContainer = ({
   const { scale } = useScale();
 
   const currentTemp =
-    scale === TempScale.CELSIUS ? temp : celciusToFahrenheit(temp);
+    scale === TempScale.CELSIUS ? temp : celsiusToFahrenheit(temp);
   const currentFeelsLike =
-    scale === TempScale.CELSIUS ? feelsLike : celciusToFahrenheit(feelsLike);
+    scale === TempScale.CELSIUS ? feelsLike : celsiusToFahrenheit(feelsLike);
   const currentWindSpeed =
     scale === TempScale.CELSIUS ? windSpeed : kmToMile(windSpeed);
   const currentCityName = cityName.includes('-')

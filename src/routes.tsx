@@ -3,7 +3,6 @@ import { createBrowserRouter, type RouteObject } from 'react-router-dom';
 import App from './App.tsx';
 import HomePage from './pages/HomePage.tsx';
 import DetailsPage from './pages/DetailsPage.tsx';
-import PageNotFound from './pages/PageNotFound.tsx';
 
 const routesObjects: RouteObject[] = [
   {
@@ -16,7 +15,6 @@ const routesObjects: RouteObject[] = [
       {
         path: '/:weekDay',
         element: <DetailsPage />,
-        errorElement: <PageNotFound />,
       },
     ],
   },

@@ -1,16 +1,20 @@
-import WeatherDetails from '../components/WeatherDetails/WeatherDetails.tsx';
-import Heading from '../ui/Heading/Heading.tsx';
 import { useParams } from 'react-router';
-// import NavButton from '../ui/NavButton/NavButton.tsx';
+
+import Heading from '../ui/Heading/Heading.tsx';
+import PageNotFound from './PageNotFound.tsx';
+import WeatherDetails from '../components/WeatherDetails/WeatherDetails.tsx';
+import { getNextFourDaysOfWeek } from '../utils/helpers.tsx';
 
 const DetailsPage = () => {
   const { weekDay } = useParams();
+
+  if (!getNextFourDaysOfWeek().some((wd) => wd === weekDay))
+    return <PageNotFound />;
 
   return (
     <>
       <Heading>{weekDay}</Heading>
       <WeatherDetails />
-      {/*<NavButton text="Go back" />*/}
     </>
   );
 };
