@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import ScaleContextProvider from '../../src/store/ScaleContextProvider.tsx';
-import {useCoordinates} from '../../src/hooks/useCoordinates.tsx';
+import { useCoordinates } from '../../src/hooks/useCoordinates.tsx';
 import WeatherDetails from '../../src/components/WeatherDetails/WeatherDetails.tsx';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -32,8 +32,9 @@ const renderComponent = () => {
 describe('WeatherDetails', () => {
   beforeEach(() => {
     vi.mocked(useCoordinates).mockReturnValue({
-      coordinates: { lat: 0, lon: 0 },
-      errorCoordinates: null,
+      coords: { lat: 0, lon: 0 },
+      isFetchingCoords: false,
+      errorCoords: null,
     });
   });
 
@@ -55,8 +56,9 @@ describe('WeatherDetails', () => {
 
   it('should render error state when errorCoordinates is returned', () => {
     vi.mocked(useCoordinates).mockReturnValue({
-      coordinates: null,
-      errorCoordinates: {
+      coords: null,
+      isFetchingCoords: false,
+      errorCoords: {
         code: 1,
         message: 'User denied Geolocation',
         PERMISSION_DENIED: 1,
@@ -72,8 +74,9 @@ describe('WeatherDetails', () => {
 
   it('should render loading state when both coordinates and errorCoordinates are null', () => {
     vi.mocked(useCoordinates).mockReturnValue({
-      coordinates: null,
-      errorCoordinates: null,
+      coords: null,
+      errorCoords: null,
+      isFetchingCoords: true,
     });
 
     renderComponent();

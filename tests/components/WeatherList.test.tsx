@@ -25,15 +25,16 @@ const renderComponent = () => {
           <WeatherList />
         </ScaleContextProvider>
       </QueryClientProvider>
-    // </BrowserRouter>
+    </BrowserRouter>
   );
 };
 
 describe('WeatherList', () => {
   beforeEach(() => {
     vi.mocked(useCoordinates).mockReturnValue({
-      coordinates: { lat: 0, lon: 0 },
-      errorCoordinates: null,
+      coords: { lat: 0, lon: 0 },
+      errorCoords: null,
+      isFetchingCoords: false,
     });
   });
 
@@ -53,8 +54,9 @@ describe('WeatherList', () => {
 
   it('should render error state when errorCoordinates is returned', () => {
     vi.mocked(useCoordinates).mockReturnValue({
-      coordinates: null,
-      errorCoordinates: {
+      coords: null,
+      isFetchingCoords: false,
+      errorCoords: {
         code: 1,
         message: 'User denied Geolocation',
         PERMISSION_DENIED: 1,
@@ -70,8 +72,9 @@ describe('WeatherList', () => {
 
   it('should render loading state when both coordinates and errorCoordinates are null', () => {
     vi.mocked(useCoordinates).mockReturnValue({
-      coordinates: null,
-      errorCoordinates: null,
+      coords: null,
+      errorCoords: null,
+      isFetchingCoords: true,
     });
 
     renderComponent();

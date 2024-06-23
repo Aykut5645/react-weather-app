@@ -2,20 +2,19 @@ import WeatherCard from '../WeatherCard/WeatherCard.tsx';
 import Loader from '../../ui/Loader/Loader.tsx';
 import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
 import { useForecast } from '../../hooks/useForecast.tsx';
-import {useCoordinates} from '../../hooks/useCoordinates.tsx';
+import { useCoordinates } from '../../hooks/useCoordinates.tsx';
 import { getDailyWeatherAtNoonForNextFourDays } from '../../utils/helpers.tsx';
 
 import styles from './WeatherList.module.scss';
 
 const WeatherList = () => {
-  const { coordinates, errorCoordinates } = useCoordinates();
-  const { forecast, isLoading, error } = useForecast(coordinates);
+  const { coords, errorCoords, isFetchingCoords } = useCoordinates();
+  const { forecast, isLoading, error } = useForecast(coords);
 
-  if ((!coordinates && !errorCoordinates) || isLoading) return <Loader />;
-  if (errorCoordinates || error)
-    return (
-      <ErrorAlert errorMessage={errorCoordinates?.message || error?.message} />
-    );
+  if (isFetchingCoords || isLoading) return <Loader />;
+
+  if (errorCoords || error)
+    return <ErrorAlert errorMessage={errorCoords?.message || error?.message} />;
 
   const modifiedForecast = getDailyWeatherAtNoonForNextFourDays(forecast!);
 

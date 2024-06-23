@@ -2,24 +2,21 @@ import Loader from '../../ui/Loader/Loader.tsx';
 import NavButton from '../../ui/NavButton/NavButton.tsx';
 import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
 import WeatherContainer from '../WeatherContainer/WeatherContainer.tsx';
-import {useCoordinates} from '../../hooks/useCoordinates.tsx';
+import { useCoordinates } from '../../hooks/useCoordinates.tsx';
 import { useForecast } from '../../hooks/useForecast.tsx';
 import { getCurrentDayWeatherAtNoon } from '../../utils/helpers.tsx';
 
 const WeatherDetails = ({ weekDay }: { weekDay: string }) => {
-  const { coordinates, errorCoordinates } = useCoordinates();
-  const { forecast, isLoading, error } = useForecast(coordinates);
+  const { coords, errorCoords, isFetchingCoords } = useCoordinates();
+  const { forecast, isLoading, error } = useForecast(coords);
 
-  if ((!coordinates && !errorCoordinates) || isLoading) return <Loader />;
-  if (errorCoordinates || error)
-    return (
-      <ErrorAlert errorMessage={errorCoordinates?.message || error?.message} />
-    );
-  console.log('Forecast => ', forecast);
+  if (isFetchingCoords || isLoading) return <Loader />;
+
+  if (errorCoords || error)
+    return <ErrorAlert errorMessage={errorCoords?.message || error?.message} />;
+
   const { list, city } = forecast!;
-  const currentDay = getCurrentDayWeatherAtNoon(list, weekDay);
-
-  const { main, weather, wind } = currentDay!;
+  const { main, weather, wind } = getCurrentDayWeatherAtNoon(list, weekDay)!;
 
   return (
     <>

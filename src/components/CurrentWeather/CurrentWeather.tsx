@@ -5,17 +5,13 @@ import { useCurrentWeather } from '../../hooks/useCurrentWeather.tsx';
 import { useCoordinates } from '../../hooks/useCoordinates.tsx';
 
 const CurrentWeather = () => {
-  const { coordinates, errorCoordinates } = useCoordinates();
-  const { currentWeather, isLoading, error } = useCurrentWeather(coordinates);
+  const { coords, errorCoords, isFetchingCoords } = useCoordinates();
+  const { currentWeather, isLoading, error } = useCurrentWeather(coords);
 
-  if ((!coordinates && !errorCoordinates) || isLoading) {
-    return <Loader />;
-  }
-  if (errorCoordinates || error) {
-    return (
-      <ErrorAlert errorMessage={errorCoordinates?.message || error?.message} />
-    );
-  }
+  if (isFetchingCoords || isLoading) return <Loader />;
+
+  if (errorCoords || error)
+    return <ErrorAlert errorMessage={errorCoords?.message || error?.message} />;
 
   const { main, weather, sys, wind, name } = currentWeather!;
 
