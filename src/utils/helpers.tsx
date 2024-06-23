@@ -1,11 +1,7 @@
-import { createMemoryRouter, RouterProvider } from 'react-router';
-import { render } from '@testing-library/react';
-
 import {
   ForecastListType,
   ForecastResponseType,
 } from '../types/ForecastResponseType.tsx';
-import { routesObjects } from '../routes.tsx';
 import { WEEK_DAYS } from './constants.tsx';
 
 export const getWeekDay = (dt: number) => {
@@ -27,37 +23,48 @@ export const kmToMile = (n: number) => {
   return Math.round(n / 1.60934);
 };
 
-export const getDailyMiddayWeather = (data: ForecastResponseType) => {
+// Function to get the next 4 days' weather at noon from the forecast data
+export const getDailyWeatherAtNoonForNextFourDays = (
+  data: ForecastResponseType
+) => {
   const today = new Date();
+
+  // Set the start time to midnight of tomorrow
   const startOfTomorrow = new Date(today);
   startOfTomorrow.setDate(today.getDate() + 1);
   startOfTomorrow.setHours(0, 0, 0, 0);
 
-  const fourDaysFromTomorrow = new Date(startOfTomorrow);
-  fourDaysFromTomorrow.setDate(startOfTomorrow.getDate() + 4);
+  // Calculate the end time, 4 days from tomorrow
+  const endOfFourDays = new Date(startOfTomorrow);
+  endOfFourDays.setDate(startOfTomorrow.getDate() + 4);
 
-  const filteredList = data.list.filter((item) => {
+  // Filter forecast data to include only the next 4 days starting from tomorrow
+  const nextFourDaysForecast = data.list.filter((item) => {
     const itemDate = new Date(item.dt_txt);
-    return itemDate >= startOfTomorrow && itemDate < fourDaysFromTomorrow;
+    return itemDate >= startOfTomorrow && itemDate < endOfFourDays;
   });
 
-  const groupedByDay = filteredList.reduce(
-    (acc: { [key: string]: ForecastListType[] }, curr) => {
-      const date = new Date(curr.dt_txt).toLocaleDateString();
-      if (!(date in acc)) acc[date] = [];
-      acc[date].push(curr);
-
+  // Group forecast entries by date
+  const groupedByDate = nextFourDaysForecast.reduce(
+    (acc: { [date: string]: ForecastListType[] }, entry) => {
+      const date = entry.dt_txt.split(' ')[0]; // Extract date in 'YYYY-MM-DD' format
+      if (!acc[date]) acc[date] = [];
+      acc[date].push(entry);
       return acc;
     },
     {}
   );
 
-  return Object.keys(groupedByDay).map((date) => {
-    const dayEntries = groupedByDay[date];
+  // Extract the noon forecast entry for each day
+  return Object.keys(groupedByDate).map((date) => {
+    const dayEntries = groupedByDate[date];
+
+    // Find the entry closest to noon (12:00:00)
     const middayEntry =
       dayEntries.find((entry) => entry.dt_txt.includes('12:00:00')) ||
       dayEntries[0];
 
+    // Return the relevant data for each day
     return {
       date,
       dt: middayEntry.dt,
@@ -68,7 +75,8 @@ export const getDailyMiddayWeather = (data: ForecastResponseType) => {
   });
 };
 
-export const getCurrentDayMiddayWeather = (
+// Function to get the current day weather at noon from the forecast data
+export const getCurrentDayWeatherAtNoon = (
   list: ForecastListType[],
   weekDay: string
 ) => {
@@ -77,12 +85,4 @@ export const getCurrentDayMiddayWeather = (
       (f: ForecastListType) => getWeekDay(f.dt).toLocaleLowerCase() === weekDay
     )
     .find((f) => f.dt_txt.includes('12:00:00'));
-};
-
-export const navigateTo = (path: string) => {
-  const router = createMemoryRouter(routesObjects, {
-    initialEntries: [path],
-  });
-
-  render(<RouterProvider router={router} />);
 };

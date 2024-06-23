@@ -1,5 +1,15 @@
-import { screen } from '@testing-library/react';
-import { navigateTo } from '../src/utils/helpers.tsx';
+import { render, screen } from '@testing-library/react';
+import { createMemoryRouter, RouterProvider } from 'react-router';
+
+import { routesObjects } from '../src/routes.tsx';
+
+export const navigateTo = (path: string) => {
+  const router = createMemoryRouter(routesObjects, {
+    initialEntries: [path],
+  });
+
+  render(<RouterProvider router={router} />);
+};
 
 describe('Router', () => {
   it('should render the Home Page for /', async () => {

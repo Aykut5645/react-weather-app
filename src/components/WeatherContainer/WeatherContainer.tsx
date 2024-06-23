@@ -3,6 +3,7 @@ import { useScale } from '../../hooks/useScale.tsx';
 import { celsiusToFahrenheit, kmToMile } from '../../utils/helpers.tsx';
 
 import styles from './WeatherContainer.module.scss';
+import WeatherIcon from '../WeatherIcon/WeatherIcon.tsx';
 
 type WeatherContainerProps = {
   temp: number;
@@ -48,9 +49,10 @@ const WeatherContainer = ({
           {Math.round(currentTemp)}&deg;
         </div>
 
-        <div className={styles['weather__container__left__icon']}>
-          <img alt="weather icon" src={`src/assets/icons/${icon}.png`} />
-        </div>
+        <WeatherIcon
+          icon={icon}
+          className={styles['weather__container__left__icon']}
+        />
       </div>
 
       <div className={styles['weather__container__right']}>

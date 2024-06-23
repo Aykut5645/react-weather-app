@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import WeatherList from '../../src/components/WeatherList/WeatherList.tsx';
 import ScaleContextProvider from '../../src/store/ScaleContextProvider.tsx';
 import { BrowserRouter } from 'react-router-dom';
-import useCoordinates from '../../src/hooks/useCoordinates.tsx';
+import {useCoordinates} from '../../src/hooks/useCoordinates.tsx';
 
 // Mock the useCoordinates hook
 vi.mock('../../src/hooks/useCoordinates.tsx');

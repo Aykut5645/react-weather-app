@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import ScaleContextProvider from '../../src/store/ScaleContextProvider.tsx';
-import useCoordinates from '../../src/hooks/useCoordinates.tsx';
+import {useCoordinates} from '../../src/hooks/useCoordinates.tsx';
 import CurrentWeather from '../../src/components/CurrentWeather/CurrentWeather.tsx';
 
 // Mock the useCoordinates hook

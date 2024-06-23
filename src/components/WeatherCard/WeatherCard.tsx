@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { celsiusToFahrenheit, getWeekDay } from '../../utils/helpers.tsx';
 
+import WeatherIcon from '../WeatherIcon/WeatherIcon.tsx';
 import { TempScale } from '../../utils/enums.tsx';
 import { useScale } from '../../hooks/useScale.tsx';
 import styles from './WeatherCard.module.scss';
@@ -16,7 +17,8 @@ const WeatherCard = ({ dt, icon, temp }: WeatherCardProps) => {
   const currentWeekDay = getWeekDay(dt);
   const { scale } = useScale();
 
-  const currentTemp = scale === TempScale.CELSIUS ? temp : celsiusToFahrenheit(temp);
+  const currentTemp =
+    scale === TempScale.CELSIUS ? temp : celsiusToFahrenheit(temp);
 
   return (
     <li>
@@ -26,13 +28,7 @@ const WeatherCard = ({ dt, icon, temp }: WeatherCardProps) => {
       >
         <div className={styles['card__container']}>
           <div className={styles['card__container__day']}>{currentWeekDay}</div>
-          <div className={styles['card__container__img']}>
-            <img
-              alt="weather icon"
-              className="weather-icon"
-              src={`src/assets/icons/${icon}.png`}
-            />
-          </div>
+          <WeatherIcon icon={icon} className={styles['card__container__img']} />
           <div className={styles['card__container__temp']}>
             <b>Temp</b>
             <span>

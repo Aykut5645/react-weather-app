@@ -2,8 +2,8 @@ import WeatherCard from '../WeatherCard/WeatherCard.tsx';
 import Loader from '../../ui/Loader/Loader.tsx';
 import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
 import { useForecast } from '../../hooks/useForecast.tsx';
-import useCoordinates from '../../hooks/useCoordinates.tsx';
-import { getDailyMiddayWeather } from '../../utils/helpers.tsx';
+import {useCoordinates} from '../../hooks/useCoordinates.tsx';
+import { getDailyWeatherAtNoonForNextFourDays } from '../../utils/helpers.tsx';
 
 import styles from './WeatherList.module.scss';
 
@@ -17,7 +17,7 @@ const WeatherList = () => {
       <ErrorAlert errorMessage={errorCoordinates?.message || error?.message} />
     );
 
-  const modifiedForecast = getDailyMiddayWeather(forecast!);
+  const modifiedForecast = getDailyWeatherAtNoonForNextFourDays(forecast!);
 
   return (
     <ul className={styles.container}>

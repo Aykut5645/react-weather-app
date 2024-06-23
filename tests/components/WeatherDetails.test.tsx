@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import ScaleContextProvider from '../../src/store/ScaleContextProvider.tsx';
-import useCoordinates from '../../src/hooks/useCoordinates.tsx';
+import {useCoordinates} from '../../src/hooks/useCoordinates.tsx';
 import WeatherDetails from '../../src/components/WeatherDetails/WeatherDetails.tsx';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -45,7 +45,6 @@ describe('WeatherDetails', () => {
 
     expect(currentWeatherDetails).toBeInTheDocument();
     expect(goBackLink).toHaveTextContent(/go back/i);
-    screen.debug();
   });
 
   it('should render loading state initially', async () => {

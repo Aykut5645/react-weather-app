@@ -24,4 +24,4 @@ const useCoordinates = () => {
   return { coordinates, errorCoordinates };
 };
 
-export default useCoordinates;
+export { useCoordinates };

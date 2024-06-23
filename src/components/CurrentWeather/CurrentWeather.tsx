@@ -2,7 +2,7 @@ import Loader from '../../ui/Loader/Loader.tsx';
 import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
 import WeatherContainer from '../WeatherContainer/WeatherContainer.tsx';
 import { useCurrentWeather } from '../../hooks/useCurrentWeather.tsx';
-import useCoordinates from '../../hooks/useCoordinates.tsx';
+import { useCoordinates } from '../../hooks/useCoordinates.tsx';
 
 const CurrentWeather = () => {
   const { coordinates, errorCoordinates } = useCoordinates();
