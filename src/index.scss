@@ -4,12 +4,7 @@
 
 // base
 @import 'styles/base/base';
+@import 'styles/base/typography';
 
 // layout
 @import 'styles/layout/main';
-
-body {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  line-height: 1.6;
-}

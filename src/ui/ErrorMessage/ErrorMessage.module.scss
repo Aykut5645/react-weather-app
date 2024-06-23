@@ -2,11 +2,10 @@
 
 .container {
   @include absCenter;
-  color: white;
   text-align: center;
 
   .status {
-    font-size: 16rem;
+    font-size: 14rem;
     font-family: cursive;
     letter-spacing: 0.7rem;
   }

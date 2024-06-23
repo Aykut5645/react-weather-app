@@ -1,10 +1,10 @@
 @import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/variables';
 
 .scale {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  color: white;
 
   &__label {
     font-size: 1.2rem;
@@ -32,7 +32,7 @@
   }
 
   &__radio-label {
-    font-size: 1.6rem;
+    font-size: $default-font-size;
     cursor: pointer;
     position: relative;
     padding-left: 4.5rem;
