@@ -3,8 +3,9 @@ import { CoordinatesType } from '../types/ForecastResponseType.tsx';
 
 const useCoordinates = () => {
   const [coords, setCoords] = useState<CoordinatesType | null>(null);
-  const [errorCoords, setErrorCoords] =
-    useState<GeolocationPositionError | null>(null);
+  const [errorCoords, setErrorCoords] = useState<{ message: string } | null>(
+    null
+  );
 
   useEffect(() => {
     const success = (position: GeolocationPosition) => {
@@ -15,7 +16,7 @@ const useCoordinates = () => {
     };
 
     const error = (err: GeolocationPositionError) => {
-      setErrorCoords(err);
+      setErrorCoords({ message: err.message });
     };
 
     navigator.geolocation.getCurrentPosition(success, error);

@@ -15,7 +15,7 @@ describe('Router', () => {
   it('should render the Home Page for /', async () => {
     navigateTo('/');
 
-    expect(screen.getByText(/current/i)).toBeInTheDocument();
+    expect(screen.getByText(/today/i)).toBeInTheDocument();
   });
 
   it('should render the Details Page for /:weekDay', async () => {

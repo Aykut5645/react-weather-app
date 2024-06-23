@@ -1,45 +1,17 @@
-import { BrowserRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { screen } from '@testing-library/react';
 
 import ForecastList from '../../src/components/ForecastList/ForecastList.tsx';
-import ScaleContextProvider from '../../src/store/ScaleContextProvider.tsx';
-import { useCoordinates } from '../../src/hooks/useCoordinates.tsx';
+import { mockUseCoordinates, renderWithProviders } from '../test-utils.tsx';
+import { expect } from 'vitest';
 
 // Mock the useCoordinates hook
 vi.mock('../../src/hooks/useCoordinates.tsx');
 
-const renderComponent = () => {
-  const client = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-
-  render(
-    <BrowserRouter>
-      <QueryClientProvider client={client}>
-        <ScaleContextProvider>
-          <ForecastList />
-        </ScaleContextProvider>
-      </QueryClientProvider>
-    </BrowserRouter>
-  );
-};
-
 describe('ForecastList', () => {
-  beforeEach(() => {
-    vi.mocked(useCoordinates).mockReturnValue({
-      coords: { lat: 0, lon: 0 },
-      errorCoords: null,
-      isFetchingCoords: false,
-    });
-  });
+  beforeEach(() => mockUseCoordinates());
 
   it('should render the list of weather forecast', async () => {
-    renderComponent();
+    renderWithProviders(<ForecastList />);
 
     const items = await screen.findAllByRole('listitem');
 
@@ -47,37 +19,32 @@ describe('ForecastList', () => {
   });
 
   it('should render loading state initially', () => {
-    renderComponent();
+    renderWithProviders(<ForecastList />);
 
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 
-  it('should render error state when errorCoordinates is returned', () => {
-    vi.mocked(useCoordinates).mockReturnValue({
+  it('should render error state when errorCoordinates is returned', async () => {
+    mockUseCoordinates({
       coords: null,
       isFetchingCoords: false,
-      errorCoords: {
-        code: 1,
-        message: 'User denied Geolocation',
-        PERMISSION_DENIED: 1,
-        POSITION_UNAVAILABLE: 2,
-        TIMEOUT: 3,
-      },
+      errorCoords: { message: 'denied' },
     });
 
-    renderComponent();
+    renderWithProviders(<ForecastList />);
 
-    expect(screen.getByText(/denied/i)).toBeInTheDocument();
+    const error = await screen.findByText(/denied/i);
+    expect(error).toBeInTheDocument();
   });
 
   it('should render loading state when both coordinates and errorCoordinates are null', () => {
-    vi.mocked(useCoordinates).mockReturnValue({
+    mockUseCoordinates({
       coords: null,
       errorCoords: null,
       isFetchingCoords: true,
     });
 
-    renderComponent();
+    renderWithProviders(<ForecastList />);
 
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });

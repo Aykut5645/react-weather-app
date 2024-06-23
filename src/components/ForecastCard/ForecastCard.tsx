@@ -14,9 +14,9 @@ type WeatherCardProps = {
 };
 
 const ForecastCard = ({ dt, icon, temp }: WeatherCardProps) => {
-  const currentWeekDay = getWeekDay(dt);
   const { scale } = useScale();
 
+  const currentWeekDay = getWeekDay(dt);
   const currentTemp =
     scale === TempScale.CELSIUS ? temp : celsiusToFahrenheit(temp);
 

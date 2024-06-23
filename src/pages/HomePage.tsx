@@ -5,7 +5,7 @@ import ForecastList from '../components/ForecastList/ForecastList.tsx';
 const HomePage = () => {
   return (
     <>
-      <Heading>Current Weather</Heading>
+      <Heading>Today</Heading>
       <CurrentWeather />
       <ForecastList />
     </>
