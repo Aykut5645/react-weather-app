@@ -5,7 +5,6 @@ const useCoordinates = () => {
   const [coords, setCoords] = useState<CoordinatesType | null>(null);
   const [errorCoords, setErrorCoords] =
     useState<GeolocationPositionError | null>(null);
-  // const [isFetchingCoord, setIsFetchingCoord] = useState(true);
 
   useEffect(() => {
     const success = (position: GeolocationPosition) => {
@@ -13,12 +12,10 @@ const useCoordinates = () => {
         lat: position.coords.latitude,
         lon: position.coords.longitude,
       });
-      // setIsFetchingCoordinates(false);
     };
 
     const error = (err: GeolocationPositionError) => {
       setErrorCoords(err);
-      // setIsFetchingCoordinates(false);
     };
 
     navigator.geolocation.getCurrentPosition(success, error);

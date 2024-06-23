@@ -1,13 +1,13 @@
-import WeatherCard from '../WeatherCard/WeatherCard.tsx';
+import ForecastCard from '../ForecastCard/ForecastCard.tsx';
 import Loader from '../../ui/Loader/Loader.tsx';
 import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
 import { useForecast } from '../../hooks/useForecast.tsx';
 import { useCoordinates } from '../../hooks/useCoordinates.tsx';
 import { getDailyWeatherAtNoonForNextFourDays } from '../../utils/helpers.tsx';
 
-import styles from './WeatherList.module.scss';
+import styles from './ForecstList.module.scss';
 
-const WeatherList = () => {
+const ForecastList = () => {
   const { coords, errorCoords, isFetchingCoords } = useCoordinates();
   const { forecast, isLoading, error } = useForecast(coords);
 
@@ -21,7 +21,7 @@ const WeatherList = () => {
   return (
     <ul className={styles.container}>
       {modifiedForecast?.map((w, i) => (
-        <WeatherCard
+        <ForecastCard
           key={i}
           dt={w?.dt}
           icon={w?.icon}
@@ -33,4 +33,4 @@ const WeatherList = () => {
   );
 };
 
-export default WeatherList;
+export default ForecastList;

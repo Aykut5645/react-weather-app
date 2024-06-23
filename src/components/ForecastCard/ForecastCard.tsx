@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { celsiusToFahrenheit, getWeekDay } from '../../utils/helpers.tsx';
 
 import WeatherIcon from '../WeatherIcon/WeatherIcon.tsx';
+import { celsiusToFahrenheit, getWeekDay } from '../../utils/helpers.tsx';
 import { TempScale } from '../../utils/enums.tsx';
 import { useScale } from '../../hooks/useScale.tsx';
-import styles from './WeatherCard.module.scss';
+import styles from './ForecastCard.module.scss';
 
 type WeatherCardProps = {
   dt: number;
@@ -13,7 +13,7 @@ type WeatherCardProps = {
   date: string;
 };
 
-const WeatherCard = ({ dt, icon, temp }: WeatherCardProps) => {
+const ForecastCard = ({ dt, icon, temp }: WeatherCardProps) => {
   const currentWeekDay = getWeekDay(dt);
   const { scale } = useScale();
 
@@ -42,4 +42,4 @@ const WeatherCard = ({ dt, icon, temp }: WeatherCardProps) => {
   );
 };
 
-export default WeatherCard;
+export default ForecastCard;
