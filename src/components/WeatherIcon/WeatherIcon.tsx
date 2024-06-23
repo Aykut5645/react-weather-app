@@ -10,7 +10,7 @@ const WeatherIcon = ({ icon, className }: WeatherIconProps) => {
 
   return (
     <div className={className}>
-      <img alt="weather icon" src={`src/assets/icons/${icon}.png`} />
+      <img alt="weather icon" src={`/assets/icons/${icon}.png`} />
     </div>
   );
 };
