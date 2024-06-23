@@ -1,5 +1,5 @@
 import Loader from '../../ui/Loader/Loader.tsx';
-import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
+import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage.tsx';
 import WeatherContainer from '../WeatherContainer/WeatherContainer.tsx';
 import { useCurrentWeather } from '../../hooks/useCurrentWeather.tsx';
 import { useCoordinates } from '../../hooks/useCoordinates.tsx';
@@ -11,7 +11,7 @@ const CurrentWeather = () => {
   if (isFetchingCoords || isLoading) return <Loader />;
 
   if (errorCoords || error)
-    return <ErrorAlert errorMessage={errorCoords?.message || error?.message} />;
+    return <ErrorMessage errorMessage={errorCoords?.message || error?.message} />;
 
   const { main, weather, sys, wind, name } = currentWeather!;
 

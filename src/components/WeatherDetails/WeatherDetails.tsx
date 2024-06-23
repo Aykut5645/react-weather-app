@@ -1,6 +1,6 @@
 import Loader from '../../ui/Loader/Loader.tsx';
 import NavButton from '../../ui/NavButton/NavButton.tsx';
-import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
+import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage.tsx';
 import WeatherContainer from '../WeatherContainer/WeatherContainer.tsx';
 import { useCoordinates } from '../../hooks/useCoordinates.tsx';
 import { useForecast } from '../../hooks/useForecast.tsx';
@@ -13,7 +13,7 @@ const WeatherDetails = ({ weekDay }: { weekDay: string }) => {
   if (isFetchingCoords || isLoading) return <Loader />;
 
   if (errorCoords || error)
-    return <ErrorAlert errorMessage={errorCoords?.message || error?.message} />;
+    return <ErrorMessage errorMessage={errorCoords?.message || error?.message} />;
 
   const { list, city } = forecast!;
   const { main, weather, wind } = getCurrentDayWeatherAtNoon(list, weekDay)!;

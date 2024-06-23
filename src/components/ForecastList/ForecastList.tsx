@@ -1,6 +1,6 @@
 import ForecastCard from '../ForecastCard/ForecastCard.tsx';
 import Loader from '../../ui/Loader/Loader.tsx';
-import ErrorAlert from '../../ui/ErrorAlert/ErrorAlert.tsx';
+import ErrorMessage from '../../ui/ErrorMessage/ErrorMessage.tsx';
 import { useForecast } from '../../hooks/useForecast.tsx';
 import { useCoordinates } from '../../hooks/useCoordinates.tsx';
 import { getDailyWeatherAtNoonForNextFourDays } from '../../utils/helpers.tsx';
@@ -14,7 +14,7 @@ const ForecastList = () => {
   if (isFetchingCoords || isLoading) return <Loader />;
 
   if (errorCoords || error)
-    return <ErrorAlert errorMessage={errorCoords?.message || error?.message} />;
+    return <ErrorMessage errorMessage={errorCoords?.message || error?.message} />;
 
   const modifiedForecast = getDailyWeatherAtNoonForNextFourDays(forecast!);
 
