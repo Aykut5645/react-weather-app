@@ -78,7 +78,7 @@ const WeatherContainer = ({
 
         <div className={styles['weather__container__right__info']}>
           <img
-            src="src/assets/icons/humidity-icon.svg"
+            src="../../../public/assets/icons/humidity-icon.svg"
             alt="Cloud"
             style={{ filter: 'invert(100%)' }}
           />
@@ -87,7 +87,7 @@ const WeatherContainer = ({
 
         <div className={styles['weather__container__right__info']}>
           <img
-            src="src/assets/icons/wind-icon.svg"
+            src="../../../public/assets/icons/wind-icon.svg"
             alt="Cloud"
             style={{ filter: 'invert(100%)' }}
           />
@@ -99,7 +99,7 @@ const WeatherContainer = ({
 
         <div className={styles['weather__container__right__info']}>
           <img
-            src="src/assets/icons/pressure-icon.svg"
+            src="../../../public/assets/icons/pressure-icon.svg"
             alt="Cloud"
             style={{ filter: 'invert(100%)' }}
           />
