@@ -2,7 +2,7 @@
 
 ## Live Demo
 
-This application is deployed on Netlify: https://precious-trifle-d496c3.netlify.app
+This application is deployed on Netlify: https://comfy-biscotti-c57f94.netlify.app/
 
 ## About the project
 
