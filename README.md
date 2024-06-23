@@ -2,7 +2,7 @@
 
 ## Live Demo
 
-This application is deployed on Netlify: https://comfy-biscotti-c57f94.netlify.app/
+This application is deployed on Netlify: [https://comfy-biscotti-c57f94.netlify.app/](https://react-time-weather.netlify.app/)
 
 ## About the project
 
