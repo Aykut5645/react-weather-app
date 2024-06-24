@@ -4,8 +4,8 @@ import {
   ForecastResponseType,
 } from '../types/ForecastResponseType.tsx';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const API_KEY = import.meta.env.VITE_API_KEY;
+const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
 const fetchCurrentWeather = async ({
   lat,

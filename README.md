@@ -13,12 +13,15 @@ This React application provides a user-friendly interface to display the upcomin
 ### Features
 
 - **location-Based Weather:** Retrieves weather data for 5 days based on your current location.
-> ***!!! Please pay attention to this important information***  
-> Since the OpenWeatherMap forecast5 endpoint, which is a paid feature, provides data in 3-hour intervals for 5 days, and I need to display the weather for 5 days, I've implemented the following data processing:  
-> 
-> I filtered this data to show the weather for each day around noon (12:00 PM) to midnight, giving you a snapshot of daily conditions.  
-> 
-> **Rationale for Data Filtering:**  
+
+> **Important Information**
+>
+> Since the OpenWeatherMap forecast5 endpoint, which is a paid feature, provides data in 3-hour intervals for 5 days, I've implemented the following data processing:
+>
+> - **Data Filtering:** To display the weather for each day, I filter this data to show the weather for each day around noon (12:00 PM) to midnight.
+>
+> **Rationale for Data Filtering:**
+>
 > Focusing on the 12:00 PM to midnight timeframe provides a more representative overview of each day's weather conditions, as it encompasses the period when people are typically most active and likely to be planning outdoor activities.
 
 - **Card-Style Display:** Presents weather information in sleek, responsive cards showcasing the date, weather condition, and icon.
@@ -70,6 +73,22 @@ This React application provides a user-friendly interface to display the upcomin
 1. Ensure you have Node.js and npm installed on your system. You can download them from the official websites:
     - Node.js: https://nodejs.org/
     - Npm: https://www.npmjs.com/ (comes bundled with Node.js)
+
+**Setup**
+
+To run this project, you will need to add the following environment variable to your `.env.local` file.
+
+1. Copy the `.env.local.example` to `.env.local`:
+
+    ```bash
+    cp .env.local.example .env.local
+    ```
+
+2. Open the newly created `.env.local` file and add your actual API key:
+
+    ```plaintext
+    VITE_OPENWEATHER_API_KEY=your_actual_api_key
+    ```
 
 **Installation**
  - Clone the repository or download the source code.

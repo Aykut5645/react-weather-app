@@ -10,7 +10,12 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+
+# Ignore the actual environment variable file
 *.local
+
+# Do not ignore the example file
+!.env.local.example
 
 # Editor directories and files
 .vscode/*
